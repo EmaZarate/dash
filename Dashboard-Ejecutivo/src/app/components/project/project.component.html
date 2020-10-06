@@ -1,0 +1,250 @@
+<div class="card card-statistics" style="height: auto;">
+  <div class="card-body" (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
+    <h3 class="mt-15 mb-15"><b>{{project.nombre}} </b></h3>
+    <div class="mt-20">
+      <div class="clearfix">
+        <a class="text-dark mb-10 float-left" href="javascript:void(0);">Progreso</a>
+        <p class="mb-10 text-info float-right">20</p>
+      </div>
+      <div class="progress progress-small">
+        <div class="skill2-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="80" aria-valuemin="0"
+          aria-valuemax="100"></div>
+      </div>
+    </div>
+  
+      <div class="row">
+        <div class="col-6 col-sm-6 mt-30">
+          <b>PM</b>
+          <p class="mt-10">{{project.pm}}</p>
+        </div>
+        <div class="col-6 col-sm-6 mt-30">
+          <b>Sponsor</b>
+          <p class="mt-10">{{project.sponsor}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 mt-10">
+          <div *ngFor="let proyectoEtapa of project.proyectoEtapas, index as i">
+            <b>Etapa del projecto</b>
+            <p class="mt-10">{{proyectoEtapa.idEtapaNavigation.nombre}}</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 mt-10">
+          <b>Tamaño projecto</b>
+          <div class="mt-10">{{project.size}}</div>
+        </div>
+      </div>
+    
+    <div class="row">
+      <div class="col-md-4 mt-10">
+        <b class="estados">Salud</b>
+      </div>
+      <div class="col-md-4 mt-10">
+        <b class="estados">Ppto</b>
+      </div>
+      <div class="col-md-4 mt-10">
+        <b class="estados">Fecha</b>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="mt-10">
+          <a data-toggle="tooltip" ngbTooltip={{project.health}}><i class="fa fa-circle fa-2x" [style.color]="project.saludColor"></i>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mt-10"><i class="fa fa-circle fa-2x" [style.color]="project.semaforoFinanColor"></i></div>
+      </div>
+      <div class="col-md-4">
+        <div class="mt-10"><i class="fa fa-circle fa-2x" [style.color]="project.semaforoFechaColor"></i></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab round">
+          <ngb-tabset class="nav nav-tabs">
+            <ngb-tab>
+              <ng-template ngbTabTitle>Objetivos</ng-template>
+              <ng-template ngbTabContent>
+                <p *ngFor="let objetivo of project.objetivos, index as i"><i class="fa fa-angle-right fa-1x list" ></i> {{objetivo.descripcion}}</p>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle>Unidades</ng-template>
+              <ng-template ngbTabContent>
+                  <p><i class="fa fa-check" *ngIf="project.unidadArt"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadArt"></i>
+                    Unidad ART</p>
+                  <p><i class="fa fa-check" *ngIf="project.unidadSegArg"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadSegArg"></i>
+                    Unidad Seguros Argentina</p>
+                  <p><i class="fa fa-check" *ngIf="project.unidadSegUru"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadSegUru"></i>
+                    Unidad Seguros Uruguay</p>
+                  <p><i class="fa fa-check" *ngIf="project.unidadRetiro"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadRetiro"></i>
+                    Unidad Retiro</p>
+                  <p><i class="fa fa-check" *ngIf="project.unidadCajaMutual"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadCajaMutual"></i>
+                    Unidad Caja Mutual</p>
+                  <p><i class="fa fa-check" *ngIf="project.unidadServFinanciero"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadServFinanciero"></i>
+                    Unidad Servicios Financieros</p>
+                  <p><i class="fa fa-check" *ngIf="project.unidadTurismo"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadTurismo"></i>
+                    Unidad Turismo</p>
+                  <p><i class="fa fa-check" *ngIf="project.unidadAsoServ"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadAsoServ"></i>
+                    Unidad Asociación Servicios</p>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle>Comentarios</ng-template>
+              <ng-template ngbTabContent>
+                {{project.comentarios}}
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle>Ppto/Recursos</ng-template>
+              <ng-template ngbTabContent>
+                <p>Presupuesto Total: <b>{{project.presupuestoTotal}}</b></p>
+                <p>Presupuesto Financiero Planificado: <b>{{project.presupuestoFinancPlanificado}}</b></p>
+                <p>Presupuesto Financiero Ejecutado: <b>{{project.presupuestoFinancEjecutado}}</b></p>
+                <p>Presupuesto Fecha Planificado: <b>{{project.presupuestoFechaPlanificado}}</b></p>
+                <p>Presupuesto Fecha Ejecutado: <b>{{project.presupuestoFechaEjecutado}}</b></p>
+                <br>
+                <p>Fte Asignado: <b>{{project.ftesAsignados}}</b></p>
+                <p>Fte Estimado: <b>{{project.ftesEstimadoPm}}</b></p>
+                <p>Fte Real: <b>{{project.ftesRealPm}}</b></p>
+                <br>
+                <p>Net Present Value: <b>{{project.npv}}</b></p>
+                <p>Internal Rate of Return: <b>{{project.irr}}</b></p>
+                <p>Plazo de Recuperación: <b>{{project.payback}}</b></p>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="card card-statistics" style="height: auto;">
+  <div class="card-body" (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
+    <h3 class="mt-15 mb-15"><b>{{project.nombre}} </b></h3>
+    <div class="mt-20">
+      <div class="clearfix">
+        <a class="text-dark mb-10 float-left" href="javascript:void(0);">Progreso</a>
+        <p class="mb-10 text-info float-right">20</p>
+      </div>
+      <div class="progress progress-small">
+        <div class="skill2-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="80" aria-valuemin="0"
+          aria-valuemax="100">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-sm-6 mt-10">
+        <b>PM</b>
+        <p class="mt-10">{{project.pm}}</p>
+      </div>
+      <div class="col-6 col-sm-6 mt-10">
+        <b>Sponsor</b>
+        <p class="mt-10">{{project.sponsor}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 mt-10">
+        <div *ngFor="let proyectoEtapa of project?.proyectoEtapas, index as i">
+          <b>Etapa del projecto</b>
+          <p class="mt-10">{{proyectoEtapa.idEtapaNavigation.nombre}}</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 mt-10">
+        <b>Tamaño projecto</b>
+        <div class="mt-10">{{project.tamanoProyecto}}</div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4 mt-10">
+        <b class="estados">Salud</b>
+      </div>
+      <div class="col-md-4 mt-10">
+        <b class="estados">Ppto</b>
+      </div>
+      <div class="col-md-4 mt-10">
+        <b class="estados">Fecha</b>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="mt-10">
+            <a data-toggle="tooltip"  ngbTooltip={{project.health}}><i class="fa fa-circle fa-2x" [style.color]="project.saludColor"></i></a>  
+        </div>
+          
+      </div>
+      <div class="col-md-4">
+        <div class="mt-10"><i class="fa fa-circle fa-2x" [style.color]="project.semaforoFinanColor"></i></div>
+      </div>
+      <div class="col-md-4">
+        <div class="mt-10"><i class="fa fa-circle fa-2x" [style.color]="project.semaforoFechaColor"></i></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="accordion plus-icon shadow">
+          <div class="acd-group" id= "{{wrapDiv}}1" > 
+            <a href="javascript:void(0);" class="acd-heading" (click)="OpenAccordion('1','1')">Objetivos</a>
+            <div class="acd-des" id={{submenu}}1 >
+                <ul class="list list-arrow">
+                    <li *ngFor="let objetivo of project.objetivos, index as i"> {{objetivo.descripcion}}  </li>
+                </ul>
+            </div>
+          </div>
+          <div class="acd-group" id="{{wrapDiv}}2"> 
+            <a href="javascript:void(0);" class="acd-heading" (click)="OpenAccordion('2','2')">Unidades</a>
+            <div class="acd-des" id="{{submenu}}2">
+                <p><i class="fa fa-check" *ngIf="project.unidadArt"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadArt"></i>
+                  Unidad ART</p>
+                <p><i class="fa fa-check" *ngIf="project.unidadSegArg"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadSegArg"></i>
+                  Unidad Seguros Argentina</p>
+                <p><i class="fa fa-check" *ngIf="project.unidadSegUru"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadSegUru"></i>
+                  Unidad Seguros Uruguay</p>
+                <p><i class="fa fa-check" *ngIf="project.unidadRetiro"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadRetiro"></i>
+                  Unidad Retiro</p>
+                <p><i class="fa fa-check" *ngIf="project.unidadCajaMutual"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadCajaMutual"></i>
+                  Unidad Caja Mutual</p>
+                <p><i class="fa fa-check" *ngIf="project.unidadServFinanciero"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadServFinanciero"></i>
+                  Unidad Servicios Financieros</p>
+                <p><i class="fa fa-check" *ngIf="project.unidadTurismo"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadTurismo"></i>
+                  Unidad Turismo</p>
+                <p><i class="fa fa-check" *ngIf="project.unidadAsoServ"></i> <i class="fa fa-times text-danger" *ngIf="!project.unidadAsoServ"></i>
+                  Unidad Asociación Servicios</p>
+            </div>
+          </div>
+          <div class="acd-group" id="{{wrapDiv}}3"> 
+            <a href="javascript:void(0);" class="acd-heading" (click)="OpenAccordion('3','3')">Presupuestos y Recursos</a>
+            <div class="acd-des" id="{{submenu}}3">
+              <p>Ppto Total: <b>{{project.presupuestoTotal}}</b></p>
+              <p>Ppto Financiero Planificado: <b>{{project.presupuestoFinancPlanificado}}</b></p>
+              <p>Ppto Financiero Ejecutado: <b>{{project.presupuestoFinancEjecutado}}</b></p>
+              <p>Ppto Fecha Planificado: <b>{{project.presupuestoFechaPlanificado}}</b></p>
+              <p>Ppto Fecha Ejecutado: <b>{{project.presupuestoFechaEjecutado}}</b></p>
+              <br>
+              <p>Fte Asignado: <b>{{project.ftesAsignados}}</b></p>
+              <p>Fte Estimado: <b>{{project.ftesEstimadoPm}}</b></p>
+              <p>Fte Real: <b>{{project.ftesRealPm}}</b></p>
+              <br>
+              <p>Net Present Value: <b>{{project.npv}}</b></p>
+              <p>Internal Rate of Return: <b>{{project.irr}}</b></p>
+              <p>Plazo de Recuperación: <b>{{project.payback}}</b></p>
+            </div>
+          </div>
+          <div class="acd-group" id="{{wrapDiv}}4"> 
+              <a href="javascript:void(0);" class="acd-heading" (click)="OpenAccordion('4','4')">Comentarios</a>
+              <div class="acd-des" id="{{submenu}}4">
+                  {{project.comentarios}}
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

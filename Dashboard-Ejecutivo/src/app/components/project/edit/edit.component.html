@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="card card-statistics">
+    <div class="card-body">
+
+      <div class="row">
+
+        <div class="col-9 mb-20">
+          <app-project-header [isEditing]="false" [selectedProject]="selectedProject" (emitChangesHeader)="saveChanges($event)">
+          </app-project-header>
+
+        </div>
+        <div class="col-3 mb-30">
+          <app-project-roles [isEditing]="false" [selectedProject]="selectedProject" (emitChangesRoles)="saveChanges($event)">
+          </app-project-roles>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12">
+          <app-project-objetivos [isEditing]="false" [selectedProject]="selectedProject" (emitChangesObjetivos)="saveChanges($event)">
+
+          </app-project-objetivos>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 mb-20 mt-20">
+          <app-project-states [isEditing]="false" [selectedProject]="selectedProject" (emitChangesStates)="saveChanges($event)"></app-project-states>
+        </div>
+      </div>
+
+      <div class="col-12 mb-10">
+        <div class="card card-statistics h-100">
+          <div class="card-body">
+            <main>
+              <input id="tab1" type="radio" name="tabs" checked>
+              <label for="tab1">Risks</label>
+
+              <input id="tab2" type="radio" name="tabs">
+              <label for="tab2">Issues</label>
+
+              <input id="tab3" type="radio" name="tabs">
+              <label for="tab3">Equipo</label>
+
+              <input id="tab4" type="radio" name="tabs">
+              <label for="tab4">Units</label>
+
+              <input id="tab5" type="radio" name="tabs">
+              <label for="tab5">Areas afectadas</label>
+
+              <input id="tab6" type="radio" name="tabs">
+              <label for="tab6">Proveedores</label>
+
+              <input id="tab7" type="radio" name="tabs">
+              <label for="tab7">Actividades retrasadas</label>
+
+              <input id="tab8" type="radio" name="tabs">
+              <label for="tab8">Próximas actividades</label>
+
+              <input id="tab9" type="radio" name="tabs">
+              <label for="tab9">Documentos</label>
+
+              <section id="content1">
+                <app-project-risks [data]="risksMappedToComponent" [title]="'Riesgos'" [idProyecto]="selectedProject?.idProyecto"
+                  (dataChangesEmitter)="submitRisks($event)">
+                </app-project-risks>
+              </section>
+
+              <section id="content2">
+                <app-project-risks [data]="issuesMappedToComponent" [title]="'Issues'" [idProyecto]="selectedProject?.idProyecto"
+                  (dataChangesEmitter)="submitIssues($event)">
+                </app-project-risks>
+              </section>
+
+              <section id="content3">
+                <app-project-team [data]="equiposMappedToComponent" [title]="'Equipos'" [idProyecto]="selectedProject?.idProyecto"
+                  (dataChangesEmitter)="submitEquipos($event)">
+                </app-project-team>
+              </section>
+
+              <section id="content4">
+                <app-project-units [selectedProject]="selectedProject" (emitChangesUnits)="saveChanges($event)">
+                </app-project-units>
+              </section>
+
+              <section id="content5">
+                <app-project-areas-afectadas [selectedProject]="selectedProject" [areas]="areas" (emitChanges)="saveChanges($event)">
+                </app-project-areas-afectadas>
+              </section>
+
+              <section id="content6">
+                <app-project-proveedores [selectedProject]="selectedProject" [proveedores]="proveedores" (emitChanges)="saveChanges($event)">
+                </app-project-proveedores>
+              </section>
+
+              <section id="content7">
+                <app-project-activities [activities]="retrasadasActividades" [idProyecto]="selectedProject?.idProyecto"
+                  (activityEmitter)="submitDelayedActivities($event)">
+                </app-project-activities>
+              </section>
+
+              <section id="content8">
+                <app-project-activities [activities]="proximasActividades" [idProyecto]="selectedProject?.idProyecto"
+                  (activityEmitter)="submitNextActivities($event)">
+                </app-project-activities>
+              </section>
+
+              <section id="content9">
+                <app-project-documentos [selectedProject]="selectedProject" (emitChanges)="submitOtherDocuments($event)">
+                </app-project-documentos>
+              </section>
+
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mb-20">
+      <button class="btn btn-info"> <a style="text-decoration:none;color:white" routerLink="home"> <i class="fa fa-arrow-left"></i>
+          Volver </a></button>
+    </div>
+  </div>
+</div>

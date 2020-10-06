@@ -1,0 +1,73 @@
+.edit-select{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.buttons-panel{
+    text-align: right;
+    font-size: 20px;
+    float: right
+}
+
+.health-status {
+    width: 25px;
+    height: 25px;
+}
+
+.colorEstadoRPF {
+    background-color: #a9d18e !important;
+  }
+  
+  .colorEstadoIncept {
+    background-color: #8faadc !important;
+  }
+  
+  .colorEstadoPlann {
+    background-color: #ffd966 !important;
+  }
+
+.colorEstadoExec {
+  background-color: #b83aeaad !important;
+}
+  
+  .colorEstadoPost {
+    background-color: #f4b183 !important;
+  }
+  
+  .colorEstadoB {
+    background-color: #aa9a9a !important;
+  }
+  
+  .colorEstadoBenefits {
+    background-color: #ffc000 !important;
+  }
+
+.colorEstadoStop {
+  background-color: #DC3545 !important;
+}
+
+.colorEstadoBacklog {
+  background-color: #5A6268 !important;
+}
+
+
+.moveLiSize li {
+  margin-left:30px;
+}
+
+
+.squardDona {
+  float: left;
+  width: 60px;
+  height: 15px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.blue {
+  background: #36A2EB;
+}
+
+.red {
+  background: #FF6384;
+}

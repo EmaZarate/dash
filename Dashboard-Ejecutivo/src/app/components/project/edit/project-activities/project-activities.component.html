@@ -1,0 +1,130 @@
+
+<div *ngIf="!isEditing">
+
+    <div class="row">
+      <div class="card card-statistics">
+        <div class="card-body" style="display:inline-flex">
+          <div class="col-xl-11 offset-1">
+            <p-table [columns]="activitiesDelayedColums" [value]="listActivitiesDelayed"
+                     sortMode="single"
+                     dataKey="idActividad"
+                     [paginator]="true"
+                     [rows]="5"
+                     [pageLinks]="3"
+                     [rowsPerPageOptions]="[5,50,100]"
+                     [totalRecords]="totalActivitiesRecords"
+                     [globalFilterFields]="['descripcion','responsable']"
+                      #dtt>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    <strong>{{col.header}}</strong>
+                    <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                  </th>
+
+                  <th style="width: 8em;text-align:center;">
+                    <button type="button" class="btn btn-xs btn-info margin-icon-buttons" title="New" (click)="newRow()" *ngIf="userRol == 'admin'">
+                      <i class="fa fa-lg fa-plus" aria-hidden="true"></i>
+                    </button>
+                  </th>
+
+                </tr>
+
+                <tr>
+                  <td *ngFor="let col of columns" [ngSwitch]="col.field" style="border: 1px solid #c8c8c8;font-weight: 700;color: #333333;background-color: #f4f4f4;padding:2px">
+                    <input *ngSwitchCase="'descripcion'" id="description" [(ngModel)]="descriptionFilter" class="form-control filterInput filterInputSearch" placeholder="Filter..." pInputText type="text" (input)="dt.filter($event.target.value, 'descripcion', 'contains')">
+                    <input *ngSwitchCase="'responsable'" id="description" [(ngModel)]="responsableFilter" class="form-control filterInput filterInputSearch" placeholder="Filter..." pInputText type="text" (input)="dt.filter($event.target.value, 'responsable', 'contains')">
+                  </td>
+
+                  <td style="width: 11em;
+                            padding: 0.571em 0.857em;
+                            border-left: 1px solid #c8c8c8;
+                            border-right: 1px solid #c8c8c8;
+                            font-weight: 700;
+                            color: #333333;
+                            background-color: #f4f4f4;
+                            text-align:center">
+                  </td>
+                </tr>
+
+
+
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                  <td *ngFor="let col of columns">
+                    <div>
+                      {{rowData[col.field]}}
+                    </div>
+                  </td>
+
+
+                  <td style="text-align:center">
+                    <button type="button" *ngIf="userRol == 'admin'" class="btn btn-xs btn-info margin-icon-buttons" style="margin-right:2px"
+                            title="Edit" (click)="editRow(rowData.idActividad,rowData.tempId)">
+                      <i class="fa fa-lg fa-pencil"
+                         aria-hidden="true"></i>
+                    </button>
+                    <button type="button" *ngIf="userRol == 'admin'" class="btn btn-xs btn-danger margin-icon-buttons" style="margin-right:2px"
+                            title="Delete" (click)="deleteRow(rowData.idActividad,rowData.tempId)">
+                      <i class="fa fa-lg fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </td>
+
+
+                </tr>
+              </ng-template>
+
+
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div *ngIf="isEditing">
+
+  <div class="row">
+
+    <div class="col-md-8 offset-2">
+      <a *ngIf="!isEditingData && !isAddingData" (click)="newRow()" class="pr-2 add-row-button" href="javascript:void(0)">
+        <i class="fa fa-plus"></i>
+      </a>
+      <div *ngIf="isEditingData || isAddingData" class="form-group">
+        <!-- <input [(ngModel)]="newObjetivo" type="text" class="form-control"> -->
+        <label for="">{{isAddingData ? 'Nuevo ': 'Actualizar '}}</label>
+        <div class="input-group input-form">
+          <input type="text" class="form-control" [(ngModel)]="newData.descripcion" maxlength="2500" value="{{newData.descripcion}}"
+                 placeholder="Descripcion.." aria-describedby="basic-addon2">
+
+        </div>
+        <div class="input-group input-form">
+          <input type="text" class="form-control" [(ngModel)]="newData.responsable" maxlength="100" value="{{newData.responsable}}"
+                 placeholder="Rol.." aria-describedby="basic-addon2">
+
+        </div>
+
+        <div>
+          <div class="form-group input-form">
+            <label for="exampleFormControlSelect1">Estado</label>
+            <select [(ngModel)]="newData.estado" class="form-control edit-select" id="selectState">
+              <option value="" disabled selected>Seleccione estado..</option>
+              <option value="Retrasada" selected>Retrasada</option>
+              <option value="Próxima">Próxima</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-success" style="margin-right: 10px;" (click)="addData()" type="button">{{isAddingData ? 'Agregar ' : 'Actualizar'}}</button>
+          <button class="btn btn-danger" (click)="cancelEdition()" type="button">Cancelar</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

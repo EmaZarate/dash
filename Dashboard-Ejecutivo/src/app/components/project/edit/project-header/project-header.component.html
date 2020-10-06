@@ -1,0 +1,802 @@
+<div class="card card-statistics">
+  <div class="card-body">
+    <div class="buttons-panel">
+      <div *ngIf="!isEditing && userRol == 'admin'">
+        <a class="pr-2" href="javascript:void(0)" (click)="editMode()"><i class="fa fa-pencil"></i></a>
+      </div>
+      <div *ngIf="isEditing">
+        <a class="pr-2" href="javascript:void(0)" (click)="cancelChanges()"><i class="fa fa-times"></i></a>
+        <a class="pr-2" href="javascript:void(0)" (click)="saveChanges()"><i class="fa fa-save"></i></a>
+      </div>
+    </div>
+
+    <div style="display:flex" class="mb-20">
+
+      <div class="col-4" *ngIf="isEditing">
+
+        <div class="form-group">
+          <label for="title">Nombre del proyecto:</label>
+          <input type="text" [(ngModel)]="name"
+                 class="form-control"
+                 id="exampleInputEmail1"
+                 aria-describedby="emailHelp"
+                 value="{{selectedProject?.nombre}}" />
+
+
+          <label for="sizeProject">Tamaño proyecto</label>
+          <select [(ngModel)]="sizeProject" class="form-control edit-select" id="sizeProject">
+            <option value=""></option>
+            <option value="Grande">Grande</option>
+            <option value="Mediano">Mediano</option>
+            <option value="Chico">Chico</option>
+          </select>
+
+          <label for="title">Link Health Check:</label>
+          <input type="text" [(ngModel)]="healthCheck" class="form-control" id="healthCheck" aria-describedby="healthCheck"
+                 value="{{selectedProject?.healthCheck}}">
+
+        </div>
+
+      </div>
+
+      <div class="col-4" *ngIf="isEditing">
+        <label for="customStateProject">Estado proyecto</label>
+        <select [(ngModel)]="customStateProject" class="form-control edit-select" id="customStateProject">
+          <option value=""></option>
+          <option value="Stop">Stop</option>
+          <option value="Backlog">Backlog</option>          
+        </select>
+      </div>
+
+
+      <div *ngIf="!isEditing" class="col-6">
+        <h4>{{selectedProject?.nombre}}</h4>
+      </div>
+
+    </div>
+
+      <div class="row" *ngIf="!isEditing">
+
+        <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Presupuesto total</p>
+                  <div *ngIf="selectedProject?.presupuestoTotal">
+                    <h6>U$S {{selectedProject?.presupuestoTotal}}</h6>
+                  </div>
+
+                  <div *ngIf="!selectedProject?.presupuestoTotal">
+                    <h6>?</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Net present value</p>
+                  <div *ngIf="selectedProject?.npv">
+                    <h6>U$S {{selectedProject?.npv}}</h6>
+                  </div>
+
+                  <div *ngIf="!selectedProject?.npv">
+                    <h6>?</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Internal rate of return</p>
+                  <div *ngIf="selectedProject?.irr">
+                    <h6>{{selectedProject?.irr}} %</h6>
+                  </div>
+
+                  <div *ngIf="!selectedProject?.irr">
+                    <h6>?</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div *ngIf="selectedProject?.saludDescripcion == 'Critico'">
+                  <div class="float-right text-right">
+                    <p class="card-text text-dark">Health</p>
+                  </div>
+                  <a data-toggle="tooltip" ngbTooltip="{{selectedProject?.saludDescripcion}}">
+                    <div class="float-left icon-box bg-danger rounded-circle" style="margin-left: 15px;">
+                    </div>
+
+                    <div *ngIf="selectedProject?.healthCheck != ''; else displayDefault">
+                      <div style="display: inline-block;margin-left: 8px;">
+                        <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.healthCheck"> Ver informe </a>
+                      </div>
+                    </div>
+
+                    <ng-template #displayDefault>
+                      <div style="display: inline-block;margin-left: 8px;">
+                        <a style="text-decoration:underline!important;"> Ver informe </a>
+                      </div>
+                    </ng-template>
+
+                  </a>
+
+
+                </div>
+                <div *ngIf="selectedProject?.saludDescripcion == 'Buena'">
+                  <div class="float-right text-right">
+                    <p class="card-text text-dark">Health</p>
+                  </div>
+                  <a data-toggle="tooltip" ngbTooltip="{{selectedProject?.saludDescripcion}}">
+                    <div class="float-left icon-box bg-success rounded-circle" style="margin-left: 15px;">
+                    </div>
+
+                    <div *ngIf="selectedProject?.healthCheck != ''; else displayDefault">
+                      <div style="display: inline-block;margin-left: 8px;">
+                        <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.healthCheck"> Ver informe </a>
+                      </div>
+                    </div>
+
+                    <ng-template #displayDefault>
+                      <div style="display: inline-block;margin-left: 8px;">
+                        <a style="text-decoration:underline!important;"> Ver informe </a>
+                      </div>
+                    </ng-template>
+
+                  </a>
+                </div>
+                <div *ngIf="selectedProject?.saludDescripcion == 'Con problemas'">
+                  <div class="float-right text-right">
+                    <p class="card-text text-dark">Health</p>
+                  </div>
+                  <a data-toggle="tooltip" ngbTooltip="{{selectedProject?.saludDescripcion}}">
+                    <div class="float-left icon-box bg-warning rounded-circle" style="margin-left: 15px;">
+                    </div>
+
+                    <div *ngIf="selectedProject?.healthCheck != ''; else displayDefault">
+                      <div style="display: inline-block;margin-left: 8px;">
+                        <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.healthCheck"> Ver informe </a>
+                      </div>
+                    </div>
+
+                    <ng-template #displayDefault>
+                      <div style="display: inline-block;margin-left: 8px;">
+                        <a style="text-decoration:underline!important;"> Ver informe </a>
+                      </div>
+                    </ng-template>
+
+                  </a>
+                </div>
+                <div *ngIf="selectedProject?.saludDescripcion != 'Con problemas' && selectedProject?.saludDescripcion != 'Buena' && selectedProject?.saludDescripcion != 'Critico'">
+                  <p class="card-text text-dark">Health</p>
+                  <div *ngIf="selectedProject?.saludCalor">
+                    <a data-toggle="tooltip" ngbTooltip="{{selectedProject?.saludDescripcion}}">
+                      <div [ngStyle]="{'background': selectedProject?.saludColor}" class="float-left icon-box rounded-circle">
+                      </div>
+                      <div *ngIf="selectedProject?.healthCheck != ''; else displayDefault">
+                        <div style="display: inline-block;margin-left: 8px;">
+                          <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.healthCheck"> Ver informe </a>
+                        </div>
+                      </div>
+
+                      <ng-template #displayDefault>
+                        <div style="display: inline-block;margin-left: 8px;">
+                          <a style="text-decoration:underline!important;"> Ver informe </a>
+                        </div>
+                      </ng-template>
+                    </a>
+                  </div>
+
+                  <div *ngIf="!selectedProject?.saludCalor">
+                    <h4>?</h4>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-2 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Payback</p>
+                  <div *ngIf="selectedProject?.payback">
+                    <h6>{{selectedProject?.payback}} </h6>
+                  </div>
+
+                  <div *ngIf="!selectedProject?.payback">
+                    <h6>?</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row" *ngIf="!isEditing">
+
+        <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Estado proyecto</p>
+                  <div *ngIf="currentProjectState?.nombreEtapa">
+                    <div [ngClass]="getColorState(currentProjectState?.nombreEtapa)" style="border-radius: 20px;text-align: center;">{{currentProjectState?.nombreEtapa}}</div>
+                  </div>
+
+                  <div *ngIf="!currentProjectState?.nombreEtapa">
+                    <h4>?</h4>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Fecha ultima modificacion</p>
+                  <div *ngIf="selectedProject?.fechaUltimaModificacion">
+                    <h6>{{selectedProject?.fechaUltimaModificacion}}</h6>
+                  </div>
+
+                  <div *ngIf="!selectedProject?.fechaUltimaModificacion">
+                    <h4>?</h4>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Tamaño proyecto</p>
+
+
+                  <ng-template #popContent>
+
+                    <div style="width:280px">
+                      <p>Variables ponderadas:</p>
+
+                      <ul style="margin-bottom:10px" class="moveLiSize">
+                        Costo
+                        <li>Chico (Hasta u$s 25.000) </li>
+                        <li>Mediano (Entre U$s 25.000 y $100.000) </li>
+                        <li>Grande (Más de u$s 100.000) </li>
+                      </ul>
+
+                      <ul style="margin-bottom:10px" class="moveLiSize">
+                        Recursos Internos
+                        <li>Chico (Hasta 15 Personas) </li>
+                        <li>Mediano (Entre 16 y 30 Personas)  </li>
+                        <li>Grande (Más de 30 personas)  </li>
+                      </ul>
+
+                      <ul style="margin-bottom:10px" class="moveLiSize">
+                        Tiempo
+                        <li>Chico (Hasta 6 meses)  </li>
+                        <li>Mediano (Entre 6 y 12 Meses)  </li>
+                        <li>Grande (Más de 12 Meses)  </li>
+                      </ul>
+                    </div>
+
+                  </ng-template>
+
+
+
+                  <div *ngIf="selectedProject?.tamanoProyecto == 'Grande'">                   
+
+                    <a style="cursor:pointer" placement="auto" triggers="mouseenter:mouseleave" [ngbPopover]="popContent" popoverTitle="Tamaño Grande">
+                      <h6>{{selectedProject?.tamanoProyecto}}</h6>
+                    </a>
+
+                  </div>
+
+                  <div *ngIf="selectedProject?.tamanoProyecto == 'Mediano'">
+
+                    <a style="cursor:pointer" placement="auto" triggers="mouseenter:mouseleave" [ngbPopover]="popContent" popoverTitle="Tamaño Mediano">
+                      <h6>{{selectedProject?.tamanoProyecto}}</h6>
+                    </a>
+
+                  </div>
+
+                  <div *ngIf="selectedProject?.tamanoProyecto == 'Chico'">
+                  
+                    <a style="cursor:pointer" placement="auto" triggers="mouseenter:mouseleave" [ngbPopover]="popContent" popoverTitle="Tamaño Chico">
+                      <h6>{{selectedProject?.tamanoProyecto}}</h6>
+                    </a>
+
+                  </div>
+
+                  <div *ngIf="!selectedProject?.tamanoProyecto">
+                    <h4>?</h4>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">FTEs asignados</p>
+                  <div *ngIf="selectedProject?.ftesAsignados">
+                    <h6>{{selectedProject?.ftesAsignados}}</h6>
+                  </div>
+
+                  <div *ngIf="!selectedProject?.ftesAsignados">
+                    <h4>?</h4>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row" *ngIf="isEditing">
+
+        <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Presupuesto total</p>
+                  <input [(ngModel)]="presupuestoTotal" type="text" class="form-control" id="presupuestoTotal" value="{{selectedProject?.presupuestoTotal}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Net present value</p>
+                  <input [(ngModel)]="npv" type="text" class="form-control" id="npv" value="{{selectedProject?.npv}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Internal rate of return</p>
+                  <input [(ngModel)]="irr" type="text" class="form-control" id="irr" value="{{selectedProject?.irr}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Health</label>
+                  <select [(ngModel)]="health" class="form-control edit-select" id="exampleFormControlSelect1">
+                    <option value=""></option>
+                    <option value="Critico">Critico</option>
+                    <option value="Buena">Buena</option>
+                    <option value="Con problemas">Con Problemas</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Payback</p>
+                  <input [(ngModel)]="payback" type="text" class="form-control" id="payback" value="{{selectedProject?.payback}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="row" *ngIf="isEditing">
+
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Ftes asignados</p>
+                  <input [(ngModel)]="ftesAsignados" type="text" class="form-control" id="ftesAsignados" value="{{selectedProject?.ftesAsignados}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Ftes estimado PM</p>
+                  <input [(ngModel)]="ftesEstimadoPm" type="text" class="form-control" id="ftesEstimadoPm" value="{{selectedProject?.ftesEstimadoPm}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-30">
+          <div class="card card-statistics h-100">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-right text-right">
+                  <p class="card-text text-dark">Ftes real PM</p>
+                  <input [(ngModel)]="ftesRealPm" type="text" class="form-control" id="ftesRealPm" value="{{selectedProject?.ftesRealPm}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="!isEditing">
+
+        <div class="card card-statistics col-md-12">
+          <div class="card-body">
+            <div class="row mb-40">
+
+              <div class="col-md-6 sm-mb-20 text-center">
+                <h5 class="card-title">Presupuesto (U$S)</h5>
+
+                <div style="position: absolute;margin-left: 65px;margin-top: 60px;" *ngFor="let sem of selectedProject?.semaforos;">
+
+                  <div *ngIf="sem.semFinColor == '#dc3545'">
+                    <h1 style="margin-top: -5px;"><i class="fa fa-circle text-danger"></i></h1>
+                  </div>
+
+                  <div *ngIf="sem.semFinColor == '#ffc107'">
+                    <h1 style="margin-top: -5px;"><i class="fa fa-circle text-warning"></i></h1>
+                  </div>
+
+                  <div *ngIf="sem.semFinColor == '#28a745'">
+                    <h1 style="margin-top: -5px;"><i class="fa fa-circle text-success"></i></h1>
+                  </div>
+
+                </div>
+
+                <div style="position: absolute;margin-left: 65px;margin-top: 60px;" *ngIf="selectedProject?.idSemFinan == null">
+                  <h6>?</h6>
+                </div>
+
+                <div *ngIf="donaFinanciadoBudgetData[0] > 0 || donaFinanciadoBudgetData[1] > 0">
+                  <div style="display:block;">
+
+                    <canvas width="250" height="150" baseChart class="round-chart big-chart mb-0"
+                            [labels]="donaFinanciadoBudgetLabel"
+                            [data]="donaFinanciadoBudgetData"
+                            [options]="donaFinanciadoBudgetOptions"
+                            [chartType]="donaFinanciadoBudgetChartType"
+                            [colors]="donaFinanciadoBudgetColor"
+                            [legend]="false"></canvas>
+
+                  </div>
+                </div>
+
+                <div *ngIf="donaFinanciadoBudgetData[0] <= 0 && donaFinanciadoBudgetData[1] <= 0">
+                  <div style="height:89px;margin-top:74px;">
+                    <h1>?</h1>
+                  </div>
+                </div>
+
+                <div *ngIf="selectedProject?.linkPresupuestoFinanciero != ''">
+
+                  <div style="display:inline-flex">
+                    <div class="float-right text-right" style="margin-top: -36px;position: absolute;margin-left: 70px;">
+                      <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.linkPresupuestoFinanciero"> Ver informe </a>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div *ngIf="selectedProject?.linkPresupuestoFinanciero == ''">
+
+                  <div style="display:inline-flex">
+                    <div class="float-right text-right" style="margin-top: -36px;position: absolute;margin-left: 100px;">
+                      <h6>?</h6>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display:inline-flex">
+                  <div class="squardDona red"></div>
+                  <h3>{{donaFinanciadoBudgetLabel[0]}}</h3>
+                </div>
+
+                <div style="display:inline-flex">
+                  <div class="squardDona blue"></div>
+                  <h3>{{donaFinanciadoBudgetLabel[1]}}</h3>
+                </div>
+
+
+
+                <div class="col-xl-12 col-lg-12 col-md-6 mt-15">
+                  <div class="card card-statistics h-100">
+                    <div class="card-body">
+                      <div class="clearfix">
+                        <div class="text-left">
+
+                          <div>
+                            <div *ngIf="selectedProject?.presupuestoFinancPlanificado == null">
+                              <h6>Planificado: ? </h6>
+                            </div>
+
+                            <div *ngIf="selectedProject?.presupuestoFinancPlanificado != null">
+                              <div style="display:inline-flex">
+                                <h6> Planificado: </h6>
+                                <h4>U$S {{selectedProject?.presupuestoFinancPlanificado}}</h4>
+                              </div>
+                            </div>
+
+                            <div style="display:inline-flex" *ngIf="selectedProject?.presupuestoFinancEjecutado == null">
+                              <h6> Ejecutado: ? </h6>
+                            </div>
+
+                            <div style="display:inline-flex" *ngIf="selectedProject?.presupuestoFinancEjecutado != null">
+                              <h6>Ejecutado: </h6> <h4>U$S {{ selectedProject?.presupuestoFinancEjecutado}}</h4>
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 text-center">
+                <h5 class="card-title">Tiempo(Meses)</h5>
+
+                <div style="position: absolute;margin-left: 65px;margin-top: 60px;" *ngFor="let sem of selectedProject?.semaforos;">
+
+                  <div *ngIf="sem.semFechaColor == '#dc3545'">
+                    <h1 style="margin-top: -5px;"><i class="fa fa-circle text-danger"></i></h1>
+                  </div>
+
+                  <div *ngIf="sem.semFechaColor == '#ffc107'">
+
+                    <h1 style="margin-top: -5px;"><i class="fa fa-circle text-warning"></i></h1>
+
+                  </div>
+
+                  <div *ngIf="sem.semFechaColor == '#28a745'">
+
+                    <h1 style="margin-top: -5px;"><i class="fa fa-circle text-success"></i></h1>
+
+                  </div>
+                </div>
+
+                <div style="position: absolute;margin-left: 65px;margin-top: 60px;" *ngIf="selectedProject?.idSemFecha == null">
+                  <h6>?</h6>
+                </div>
+
+                <div *ngIf="donaFechaBudgetData[0] > 0 && donaFechaBudgetData[1] > 0">
+                  <div style="display:block">
+                    <canvas width="250" height="150" baseChart class="round-chart big-chart mb-0"
+                            [labels]="donaFechaBudgetLabel"
+                            [data]="donaFechaBudgetData"
+                            [options]="donaFechaBudgetOptions"
+                            [chartType]="donaFechaBudgetChartType"
+                            [colors]="donaFechaBudgetColor"
+                            [legend]="false"></canvas>
+                  </div>
+                </div>
+
+                <div *ngIf="donaFechaBudgetData[0] <= 0 && donaFechaBudgetData[1] <= 0">
+                  <div style="height:89px;margin-top:74px;">
+                    <h1>?</h1>
+                  </div>
+                </div>
+
+                <div *ngIf="selectedProject?.linkPresupuestoFecha != ''">
+
+                  <div style="display:inline-flex">
+                    <div class="float-right text-right" style="margin-top: -36px;position: absolute;margin-left: 70px;">
+                      <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.linkPresupuestoFecha"> Ver informe </a>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div *ngIf="selectedProject?.linkPresupuestoFecha == ''">
+
+                  <div style="display:inline-flex">
+                    <div class="float-right text-right" style="margin-top: -36px;position: absolute;margin-left: 100px;">
+                      <h6>?</h6>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display:inline-flex">
+                  <div class="squardDona red"></div>
+                  <h3>{{donaFechaBudgetLabel[0]}}</h3>
+                </div>
+
+                <div style="display:inline-flex">
+                  <div class="squardDona blue"></div>
+                  <h3>{{donaFechaBudgetLabel[1]}}</h3>
+                </div>
+
+
+                <div class="col-xl-12 col-lg-12 col-md-12 mt-15">
+                  <div class="card card-statistics h-100">
+                    <div class="card-body">
+                      <div class="clearfix">
+                        <div class="text-left">
+
+                          <div>
+                            <div *ngIf="selectedProject?.presupuestoFechaPlanificado == null">
+                              <h6>Presupuestados: ? </h6>
+                            </div>
+
+                            <div style="display:inline-flex" *ngIf="selectedProject?.presupuestoFechaPlanificado != null">
+                              <h6>Presupuestados: </h6> <h5> {{selectedProject?.presupuestoFechaPlanificado}}</h5>
+                            </div>
+
+                            <div style="display:inline-flex" *ngIf="selectedProject?.prespuestoFechaEjecutado == null">
+                              <h6>Ejecutados: ? </h6>
+                            </div>
+
+                            <div *ngIf="selectedProject?.prespuestoFechaEjecutado != null">
+                              <div style="display:inline-flex">
+                                <h6>Ejecutados: </h6> <h5>{{selectedProject?.prespuestoFechaEjecutado}}</h5>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card card-statistics col-md-12" *ngIf="isEditing">
+        <div class="card-body">
+          <div class="row mb-40">
+            <div class="col-md-6 sm-mb-20 text-center">
+              <h5 class="card-title">Presupuesto (U$S)</h5>
+
+              <div class="row">
+                <div class="col-md-6 text-left">
+                  <p class="card-text text-dark">Planificado:</p>
+                  <input [(ngModel)]="presupuestoPlanificado" type="text" class="form-control" id="presupuestoPlanificado"
+                         value="{{selectedProject?.presupuestoFinancPlanificado}}">
+                </div>
+                <div class="col-md-6 text-left">
+                  <p class="card-text text-dark">Ejecutado:</p>
+                  <input [(ngModel)]="presupuestoEjecutado" type="text" class="form-control" id="presupuestoEjecutado"
+                         value="{{selectedProject?.presupuestoFinancEjecutado}}">
+                </div>
+
+                <div class="col-md-6 text-left">
+                  <label for="semFinanciero">Semaforo financiero</label>
+                  <select [(ngModel)]="IdSemFinanciero" class="form-control edit-select" id="semFinanciero">
+                    <option value=""></option>
+                    <option value="1">Rojo</option>
+                    <option value="2">Amarillo</option>
+                    <option value="3">Verde</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6 text-left">
+                  <label for="linkPresupuestoFinanciero">Link presupuesto financiero</label>
+                  <input [(ngModel)]="linkPresupuestoFinanciero" type="text" class="form-control" id="linkPresupuestoFinanciero"
+                         value="{{selectedProject?.linkPresupuestoFinanciero}}">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 text-center">
+              <h5 class="card-title">Tiempo(Meses)</h5>
+
+              <div class="row">
+                <div class="col-md-6 text-left">
+                  <p class="card-text text-dark">Presupuestados:</p>
+                  <input [(ngModel)]="presupuestoFechaPlanificado" type="text" class="form-control" id="presupuestoFechaPlanificado"
+                         value="{{selectedProject?.presupuestoFechaPlanificado}}">
+                </div>
+                <div class="col-md-6 text-left">
+                  <p class="card-text text-dark">Ejecutado:</p>
+                  <input [(ngModel)]="presupuestoFechaEjecutado" type="text" class="form-control" id="presupuestoFechaEjecutado"
+                         value="{{selectedProject?.presupuestoFechacEjecutado}}">
+                </div>
+
+                <div class="col-md-6 text-left">
+                  <label for="semMeses">Semaforo de meses</label>
+                  <select [(ngModel)]="IdSemDeMeses" class="form-control edit-select" id="semMeses">
+                    <option value=""></option>
+                    <option value="1">Rojo</option>
+                    <option value="2">Amarillo</option>
+                    <option value="3">Verde</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6 text-left">
+                  <label for="linkPresupuestoFecha">Link presupuesto fecha</label>
+                  <input [(ngModel)]="linkPresupuestoFecha" type="text" class="form-control" id="linkPresupuestoFecha"
+                         value="{{selectedProject?.linkPresupuestoFecha}}">
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+

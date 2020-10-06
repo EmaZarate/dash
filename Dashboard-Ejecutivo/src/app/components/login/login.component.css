@@ -1,0 +1,14 @@
+.clearfix{
+  text-align: center
+}
+
+h2{
+    text-align: center
+}
+.wrapper{
+    background-color: #fff;
+    background: url(../../../assets/images/bg-inicio.jpg);
+    width: 100%;
+    height: 100%;
+}
+

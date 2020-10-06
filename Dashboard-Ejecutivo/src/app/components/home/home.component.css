@@ -1,0 +1,510 @@
+.display{
+    margin-bottom: 30px;
+}
+
+
+.steps {
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+  .steps a {
+    color: black;
+    text-decoration: none;
+  }
+
+.filterInput {
+  padding: 4px;
+  border: 1px solid #ccc;
+  background: white !important;  
+}
+
+
+@media only screen and (max-width:900px) {
+  .centerSpan {
+    margin-left: 20px;
+  }
+
+  .centerManagement {
+    margin-left: 6px;
+    position: absolute;
+  }
+
+  .centerLive {
+    margin-left: 30px;
+  }
+
+  .centerBAU {
+    margin-left: -7px;
+  }
+
+  .steps li {
+    float: left;
+    margin-left: 0;
+    width: 85px !important;
+    height: 59px; /* total height */
+    list-style-type: none;
+    padding: 10px 5px 0px 10px; /* padding around text, last should include arrow width */
+    border-right: 5px solid white; /* width: gap between arrows, color: background of document */
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1090px) and (min-width:900px) {
+  .centerSpan {
+    margin-left: 20px;
+  }
+
+  .centerManagement {
+    margin-left: 6px;
+    position: absolute;
+  }
+
+  .centerLive {
+    margin-left: 30px;
+  }
+
+  .centerBAU {
+    margin-left: -7px;
+  }
+
+  .steps li {
+    float: left;
+    margin-left: 0;
+    width: 90px !important;
+    height: 59px; /* total height */
+    list-style-type: none;
+    padding: 10px 5px 0px 10px; /* padding around text, last should include arrow width */
+    border-right: 5px solid white; /* width: gap between arrows, color: background of document */
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1170px) and (min-width:1090px) {
+  .centerSpan {
+    margin-left: 20px;
+  }
+
+  .centerManagement {
+    margin-left: 13px;
+    position: absolute;
+  }
+
+  .centerLive {
+    margin-left: 44px;
+  }
+
+  .centerBAU {
+    margin-left: 0px;
+  }
+
+  .steps li {
+    float: left;
+    margin-left: 0;
+    width: 100px !important;
+    height: 59px; /* total height */
+    list-style-type: none;
+    padding: 10px 5px 0px 10px; /* padding around text, last should include arrow width */
+    border-right: 5px solid white; /* width: gap between arrows, color: background of document */
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1400px) and (min-width:1170px) {
+  .centerSpan {
+    margin-left: 30px;
+  }
+
+
+
+  .centerManagement {
+    margin-left: 13px;
+    position: absolute;
+  }
+
+  .centerLive {
+    margin-left: 44px;
+  }
+
+  .centerBAU {
+    margin-left: 0px;
+  }
+
+  .steps li {
+    float: left;
+    margin-left: 0;
+    width: 120px !important;
+    height: 59px; /* total height */
+    list-style-type: none;
+    padding: 10px 5px 0px 10px; /* padding around text, last should include arrow width */
+    border-right: 5px solid white; /* width: gap between arrows, color: background of document */
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1579px) and (min-width:1400px) {
+  .centerSpan {
+    margin-left: 39px;
+  }
+
+
+  .centerManagement {
+    margin-left: 25px;
+    position: absolute;
+  }
+
+  .centerLive {
+    margin-left: 53px;
+  }
+
+  .centerBAU {
+    margin-left: 13px;
+  }
+
+
+  .steps li {
+    float: left;
+    margin-left: 0;
+    width: 133px !important;
+    height: 59px; /* total height */
+    list-style-type: none;
+    padding: 10px 5px 0px 10px; /* padding around text, last should include arrow width */
+    border-right: 5px solid white; /* width: gap between arrows, color: background of document */
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1680px) and (min-width:1579px) {
+  .centerSpan {
+    margin-left: 50px;
+  }
+
+
+  .centerManagement {
+    margin-left: 32px;
+    position: absolute;
+  }
+
+  .centerLive {
+    margin-left: 65px;
+  }
+
+  .centerBAU {
+    margin-left: 29px;
+  }
+
+  .steps li {
+    float: left;
+    margin-left: 0;
+    width: 175px !important;
+    height: 59px; /* total height */
+    list-style-type: none;
+    padding: 10px 5px 0px 10px; /* padding around text, last should include arrow width */
+    border-right: 5px solid white; /* width: gap between arrows, color: background of document */
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1838px) and (min-width: 1680px) {
+  .centerSpan {
+    margin-left: 67px;
+  }
+
+
+  .centerManagement {
+    margin-left: 47px;
+    position: absolute;
+  }
+
+  .centerLive {
+    margin-left: 81px;
+  }
+
+  .centerBAU {
+    margin-left: 43px;
+  }
+
+  .steps li {
+    float: left;
+    margin-left: 0;
+    width: 185px !important;
+    height: 59px; /* total height */
+    list-style-type: none;
+    padding: 10px 5px 0px 10px; /* padding around text, last should include arrow width */
+    border-right: 5px solid white; /* width: gap between arrows, color: background of document */
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1920px) and (min-width: 1838px) {
+
+  .centerSpan {
+    margin-left: 67px;
+  }
+
+
+  .centerManagement {
+    margin-left: 47px;
+    position: absolute;
+  }
+
+  .centerLive {
+    margin-left: 81px;
+  }
+
+  .centerBAU {
+    margin-left: 43px;
+  }
+
+
+  .steps li {
+    float: left;
+    margin-left: 0;
+    width: 200px !important;
+    height: 59px; /* total height */
+    list-style-type: none;
+    padding: 10px 5px 0px 10px; /* padding around text, last should include arrow width */
+    border-right: 5px solid white; /* width: gap between arrows, color: background of document */
+    position: relative;
+  }
+}
+
+  /* remove extra padding on the first object since it doesn't have an arrow to the left */
+  .steps li:first-child {
+    padding-left: 15px;
+  }
+  /* white arrow to the left to "erase" background (starting from the 2nd object) */
+  .steps li:nth-child(n+1)::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-left: 25px solid white; /* width: arrow width, color: background of document */
+    border-top: 30px solid transparent; /* width: half height */
+    border-bottom: 30px solid transparent; /* width: half height */
+    width: 0;
+    height: 0;
+    content: " ";
+  }
+
+  /* colored arrow to the right */
+  .steps li::after {
+    z-index: 1; /* need to bring this above the next item */
+    position: absolute;
+    top: 0;
+    right: -25px; /* arrow width (negated) */
+    display: block;
+    border-left: 25px solid #7c8437; /* width: arrow width */
+    border-top: 30px solid transparent; /* width: half height */
+    border-bottom: 30px solid transparent; /* width: half height */
+    width: 0;
+    height: 0;
+    content: " ";
+  }
+
+  /* Setup colors (both the background and the arrow) */
+
+  /* Completed */
+
+
+  .colorEstadoRFP {
+    background-color: #a9d18e;
+  }
+
+    .colorEstadoRFP::after {
+      z-index: 1; /* need to bring this above the next item */
+      position: absolute;
+      top: 0;
+      right: -25px; /* arrow width (negated) */
+      display: block;
+      border-left: 25px solid #a9d18e !important; /* width: arrow width */
+      border-top: 30px solid transparent; /* width: half height */
+      border-bottom: 30px solid transparent; /* width: half height */
+      width: 0;
+      height: 0;
+      content: " ";
+    }
+
+  .colorEstadoInception {
+    background-color: #8faadc;
+  }
+
+    .colorEstadoInception::after {
+      z-index: 1; /* need to bring this above the next item */
+      position: absolute;
+      top: 0;
+      right: -25px; /* arrow width (negated) */
+      display: block;
+      border-left: 25px solid #8faadc !important; /* width: arrow width */
+      border-top: 30px solid transparent; /* width: half height */
+      border-bottom: 30px solid transparent; /* width: half height */
+      width: 0;
+      height: 0;
+      content: " ";
+    }
+
+
+  .colorEstadoPlanning {
+    background-color: #ffd966;
+  }
+
+    .colorEstadoPlanning::after {
+      z-index: 1; /* need to bring this above the next item */
+      position: absolute;
+      top: 0;
+      right: -25px; /* arrow width (negated) */
+      display: block;
+      border-left: 25px solid #ffd966 !important; /* width: arrow width */
+      border-top: 30px solid transparent; /* width: half height */
+      border-bottom: 30px solid transparent; /* width: half height */
+      width: 0;
+      height: 0;
+      content: " ";
+    }
+
+.colorEstadoExecution {
+  background-color: #b83aeaad;
+}
+
+  .colorEstadoExecution::after {
+    z-index: 1; /* need to bring this above the next item */
+    position: absolute;
+    top: 0;
+    right: -25px; /* arrow width (negated) */
+    display: block;
+    border-left: 25px solid #b83aeaad !important; /* width: arrow width */
+    border-top: 30px solid transparent; /* width: half height */
+    border-bottom: 30px solid transparent; /* width: half height */
+    width: 0;
+    height: 0;
+    content: " ";
+  }
+
+  .colorEstadoPostGoLive {
+    background-color: #f4b183;
+  }
+
+    .colorEstadoPostGoLive::after {
+      z-index: 1; /* need to bring this above the next item */
+      position: absolute;
+      top: 0;
+      right: -25px; /* arrow width (negated) */
+      display: block;
+      border-left: 25px solid #f4b183 !important; /* width: arrow width */
+      border-top: 30px solid transparent; /* width: half height */
+      border-bottom: 30px solid transparent; /* width: half height */
+      width: 0;
+      height: 0;
+      content: " ";
+    }
+
+
+  .colorEstadoBAU {
+    background-color: #767171;
+  }
+
+    .colorEstadoBAU::after {
+      z-index: 1; /* need to bring this above the next item */
+      position: absolute;
+      top: 0;
+      right: -25px; /* arrow width (negated) */
+      display: block;
+      border-left: 25px solid #767171 !important; /* width: arrow width */
+      border-top: 30px solid transparent; /* width: half height */
+      border-bottom: 30px solid transparent; /* width: half height */
+      width: 0;
+      height: 0;
+      content: " ";
+    }
+
+
+  .colorEstadoBenefitsManagament {
+    background-color: #ffc000;
+  }
+
+    .colorEstadoBenefitsManagament::after {
+      z-index: 1; /* need to bring this above the next item */
+      position: absolute;
+      top: 0;
+      right: -25px; /* arrow width (negated) */
+      display: block;
+      border-left: 25px solid #ffc000 !important; /* width: arrow width */
+      border-top: 30px solid transparent; /* width: half height */
+      border-bottom: 30px solid transparent; /* width: half height */
+      width: 0;
+      height: 0;
+      content: " ";
+    }
+
+.colorEstadoRPF {
+  background-color: #a9d18e !important;
+}
+
+.colorEstadoIncept {
+  background-color: #8faadc !important;
+}
+
+.colorEstadoPlann {
+  background-color: #ffd966 !important;
+}
+
+.colorEstadoExec {
+  background-color: #b83aeaad !important;
+}
+
+.colorEstadoPost {
+  background-color: #f4b183 !important;
+}
+
+.colorEstadoB {
+  background-color: #767171 !important;
+}
+
+.colorEstadoBenefits {
+  background-color: #ffc000 !important;
+}
+
+.colorEstadoStop {
+  background-color: #DC3545 !important;
+}
+
+.colorEstadoBacklog {
+  background-color: #5A6268 !important;
+}
+
+
+/* Current */
+.steps li.current {
+  background-color: #ffc107 !important;
+}
+
+    .steps li.current::after {
+      border-left-color: #ffc107 !important;
+    }
+
+  /* Following */
+  .steps li.disable {
+    background-color: #EBEBEB !important;
+    cursor: default
+  }
+
+    .steps li.disable::after {
+      border-left-color: #EBEBEB !important;
+      cursor: default
+    }
+
+    .steps li.disable a {
+      cursor: default
+    }
+
+      .steps li.disable a::after {
+        cursor: default
+      }
+
+
+  body .ui-paginator .ui-dropdown {
+    margin-left: 0.5em;
+    height: 2.310em !important;
+    min-width: auto;
+  }

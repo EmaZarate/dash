@@ -1,0 +1,40 @@
+.colorEstadoRPF {
+  background-color: #a9d18e !important;
+}
+
+.colorEstadoIncept {
+  background-color: #8faadc !important;
+}
+
+.colorEstadoPlann {
+  background-color: #ffd966 !important;
+}
+
+.colorEstadoExec {
+  background-color: #b83aeaad !important;
+}
+
+.colorEstadoPost {
+  background-color: #f4b183 !important;
+}
+
+.colorEstadoB {
+  background-color: #767171 !important;
+}
+
+.colorEstadoBenefits {
+  background-color: #ffc000 !important;
+}
+
+
+body .ui-paginator .ui-dropdown {
+  margin-left: 0.5em;
+  height: 2.310em !important;
+  min-width: auto;
+}
+
+.filterInput {
+  padding: 4px;
+  border: 1px solid #ccc;
+  background: white !important;
+}

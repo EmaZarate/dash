@@ -1,0 +1,33 @@
+<div class="wrapper" id="wrapperMenuSlice">
+  <!--=================================
+   preloader -->
+  <div id="pre-loader" *ngIf="_commonDataService.loader.value">
+    <img src="../assets/images/pre-loader/loader-01.svg" alt="">
+  </div>
+  <!--=================================
+   preloader -->
+  <!--=================================
+   Main content -->
+
+  <app-header>
+
+  </app-header>
+
+
+  <div class="container-fluid" style="padding-top:4.7rem">
+
+    <div class="row">
+
+      <app-sidebar></app-sidebar>
+      <!--=================================
+      wrapper -->
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+        <!--<app-footer></app-footer>-->
+      </div>
+
+      <!-- main content wrapper end-->
+    </div>
+  </div>
+
+</div>

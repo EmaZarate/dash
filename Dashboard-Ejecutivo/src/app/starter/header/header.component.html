@@ -1,0 +1,41 @@
+<!--=================================
+   header start-->
+<nav class="admin-header header-dark navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+
+  <div class="text-left main-header navbar-brand-wrapper">
+    <a [routerLink]="['/home/index']" class="logo">
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b class="firstWord"></b> PMO</span>
+    </a>
+  </div>
+
+  <!-- Top bar left -->
+  <ul class="nav navbar-nav mr-auto">
+    <li class="nav-item">
+      <a id="button-toggle" class="button-toggle-nav inline-block ml-20 pull-left" href="javascript:void(0);" (click)="toggleMenu()"><i class="zmdi zmdi-menu ti-align-right"></i></a>
+    </li>
+  </ul>
+  <!-- top bar right -->
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown mr-30">
+      <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
+        <img src="../assets/images/profile-avatar.jpg" alt="avatar">
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <div class="dropdown-header">
+          <div class="media">
+            <div class="media-body">
+              <h5 class="mt-0 mb-0">{{userLoged?.name}}</h5>
+              <span>{{userLoged?.email}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="javascript:void(0);" (click)="logout()"><i class="text-danger ti-unlock"></i>Logout</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<!--=================================
+ header End-->

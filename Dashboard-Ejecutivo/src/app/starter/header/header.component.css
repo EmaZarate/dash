@@ -1,0 +1,32 @@
+.logo {
+  margin-left: 50px;
+  font-weight: 500;
+  color: white;
+}
+
+.firstWord:after {
+  content: "Cartera Proyectos"
+}
+
+.firstWord {
+  color: #84ba3f;
+}
+
+@media only screen and (max-width: 1090px) {
+
+  .firstWord:after {
+    content: "CP"
+  }
+
+  .admin-header.navbar .navbar-brand-wrapper {
+    width: 122px !important;
+  } 
+}
+
+@media (max-width: 991px) {
+  .admin-header.navbar .navbar-brand-wrapper {
+    width: 122px !important;
+  }
+}
+
+

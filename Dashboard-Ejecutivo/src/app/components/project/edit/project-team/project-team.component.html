@@ -1,0 +1,124 @@
+<div class="buttons-panel">
+  <div *ngIf="!isEditing && userRol == 'admin'">
+    <a class="pr-2" href="javascript:void(0)" (click)="editMode()"><i class="fa fa-pencil"></i></a>
+  </div>
+  <div *ngIf="isEditing">
+    <a class="pr-2" href="javascript:void(0)" (click)="cancelChanges()"><i class="fa fa-times"></i></a>
+    <a class="pr-2" href="javascript:void(0)" (click)="saveChanges()"><i class="fa fa-save"></i></a>
+  </div>
+</div>
+
+<div *ngIf="!isEditing">
+  <div *ngIf="!data || data.length == 0">
+    <p> No se encontraron {{title}} </p>
+  </div>
+
+
+  <div *ngIf="listTeamProject?.length > 0">
+    <div class="row">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <div class="col-xl-12">
+            <p-table [columns]="teamColums" [value]="listTeamProject"
+                     sortMode="single"
+                     dataKey="id"
+                     [paginator]="true"
+                     [rows]="50"
+                     [pageLinks]="3"
+                     [rowsPerPageOptions]="[50,75,100]"
+                     [totalRecords]="totalTeamProjectRecords"
+                     [globalFilterFields]="['nombre','rol']"
+                     #dt>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    <strong>{{col.header}}</strong>
+                    <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                  </th>
+
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                  <td *ngFor="let col of columns">
+                    <div>
+                      {{rowData[col.field]}}
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+
+
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="isEditing">
+  <div class="row">
+    <div class="table-responsive col-md-6">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of data">
+            <td>{{item.nombre}}</td>
+            <td>{{item.rol}}</td>
+            <td>
+              <a class="pr-2" href="javascript:void(0)" (click)="editRow(item.id, item.tempId)"><i class="fa fa-pencil"></i></a>
+              <a class="pr-2" href="javascript:void(0)" (click)="deleteRow(item.id, item.tempId)"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6">
+      <a *ngIf="!isEditingData && !isAddingData" (click)="newRow()" class="pr-2 add-row-button" href="javascript:void(0)"><i
+          class="fa fa-plus"></i></a>
+      <div *ngIf="isEditingData || isAddingData" class="form-group">
+        <!-- <input [(ngModel)]="newObjetivo" type="text" class="form-control"> -->
+        <label for="">{{isAddingData ? 'Nuevo ' + title : 'Actualizar ' + title}}</label>
+        <div class="input-group" style="margin-bottom: 10px;">
+          <input type="text" class="form-control" [(ngModel)]="newData.nombre" value="{{newData.nombre}}"
+                 placeholder="Nombre.." aria-describedby="basic-addon2">
+
+        </div>
+
+
+
+
+        <div class="form-group input-form">
+          <select class="form-control" id="role" style="height:3.5rem" required  [(ngModel)]="newData.idRol">
+            <option value=""></option>
+            <option *ngFor="let field of _roleTeamFields" [value]="field.idRol">{{field.descripcion}}</option>
+          </select>
+        </div>
+
+        <!--<div class="input-group">
+          <input type="text" class="form-control" [(ngModel)]="newData.rol" value="{{newData.rol}}"
+                 placeholder="Rol.." aria-describedby="basic-addon2">
+
+        </div>-->
+
+        <div class="form-group">
+          <button class="btn btn-success" (click)="addData()" type="button">{{isAddingData ? 'Agregar ' : 'Actualizar'}}</button>
+          <button class="btn btn-danger" (click)="cancelEdition()" type="button">Cancelar</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

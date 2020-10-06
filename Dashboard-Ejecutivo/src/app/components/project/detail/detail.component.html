@@ -1,0 +1,1215 @@
+<!-- main body -->
+
+
+<div class="row">
+  <div class="col-12 mb-30 scrolltop">
+    <div class="card card-statistics">
+      <div class="card-body">
+
+        <div class="row">
+
+          <div class="col-9 mb-20">
+            <div class="card card-statistics">
+              <div class="card-body">
+
+                <div style="display:flex" class="mb-20">
+
+                  <div class="col-12">
+                    <h4>{{selectedProject?.nombre}}</h4>
+                  </div>
+
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <div class="float-right text-right">
+                            <p class="card-text text-dark">Presupuesto total</p>
+
+                            <div *ngIf="selectedProject?.presupuestoTotal">
+                              <h6>U$S {{selectedProject?.presupuestoTotal}}</h6>
+                            </div>
+
+                            <div *ngIf="!selectedProject?.presupuestoTotal">
+                              <h4>?</h4>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <div class="float-right text-right">
+                            <p class="card-text text-dark">Net present value</p>
+
+                            <div *ngIf="selectedProject?.npv">
+                              <h6>U$S {{selectedProject?.npv }}</h6>
+                            </div>
+
+                            <div *ngIf="!selectedProject?.npv">
+                              <h4>?</h4>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-2 col-lg-6 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <div class="float-right text-right">
+                            <p class="card-text text-dark">Internal rate of return</p>
+
+                            <div *ngIf="selectedProject?.irr">
+                              <h6>{{selectedProject?.irr}} %</h6>
+                            </div>
+
+                            <div *ngIf="!selectedProject?.irr">
+                              <h4>?</h4>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-2 col-lg-6 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                      <div class="card-body">
+                        <div class="clearfix">
+
+                          <div *ngIf="selectedProject?.saludDescripcion == 'Critico'">
+                            <div class="float-right text-right">
+                              <p class="card-text text-dark">Health</p>
+                            </div>
+                            <a data-toggle="tooltip" style="display: inline-block;" ngbTooltip="{{selectedProject?.saludDescripcion}}">
+                              <div class="float-left icon-box bg-danger rounded-circle" style="margin-left: 15px;">
+                              </div>
+
+                              <div *ngIf="selectedProject?.healthCheck != ''; else displayDefault">
+                                <div style="display: inline-block;margin-left: 5px;">
+                                  <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.healthCheck"> Ver informe </a>
+                                </div>
+                              </div>
+
+                              <ng-template #displayDefault>
+                                <div style="display: inline-block;margin-left: 5px;">
+                                  <a style="text-decoration:underline!important;"> Ver informe </a>
+                                </div>
+                              </ng-template>
+                            </a>
+                          </div>
+
+                          <div *ngIf="selectedProject?.saludDescripcion == 'Buena'">
+                            <div class="float-right text-right">
+                              <p class="card-text text-dark">Health</p>
+                            </div>
+                            <a data-toggle="tooltip" style="display: inline-block;" ngbTooltip="{{selectedProject?.saludDescripcion}}">
+                              <div class="float-left icon-box bg-success rounded-circle" style="margin-left: 15px;">
+                              </div>
+                              <div *ngIf="selectedProject?.healthCheck != ''; else displayDefault">
+                                <div style="display: inline-block;margin-left: 5px;">
+                                  <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.healthCheck"> Ver informe </a>
+                                </div>
+                              </div>
+
+                              <ng-template #displayDefault>
+                                <div style="display: inline-block;margin-left: 5px;">
+                                  <a style="text-decoration:underline!important;"> Ver informe </a>
+                                </div>
+                              </ng-template>
+                            </a>
+
+                          </div>
+
+                          <div *ngIf="selectedProject?.saludDescripcion == 'Con problemas'">
+                            <div class="float-right text-right">
+                              <p class="card-text text-dark">Health</p>
+                            </div>
+                            <a data-toggle="tooltip" style="display: inline-block;" ngbTooltip="{{selectedProject?.saludDescripcion}}">
+                              <div class="float-left icon-box bg-warning rounded-circle" style="margin-left: 15px;">
+                              </div>
+
+                              <div *ngIf="selectedProject?.healthCheck != ''; else displayDefault">
+                                <div style="display: inline-block;margin-left: 5px;">
+                                  <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.healthCheck"> Ver informe </a>
+                                </div>
+                              </div>
+
+                              <ng-template #displayDefault>
+                                <div style="display: inline-block;margin-left: 5px;">
+                                  <a style="text-decoration:underline!important;"> Ver informe </a>
+                                </div>
+                              </ng-template>
+                            </a>
+
+                          </div>
+
+                          <div *ngIf="selectedProject?.saludDescripcion != 'Con problemas' && selectedProject?.saludDescripcion != 'Buena' && selectedProject?.saludDescripcion != 'Critico'">
+                            <p class="card-text text-dark">Health</p>
+
+
+                            <div *ngIf="selectedProject?.saludCalor">
+                              <a data-toggle="tooltip" style="display: inline-block;" ngbTooltip="{{selectedProject?.saludDescripcion}}">
+                                <div [ngStyle]="{'background': selectedProject?.saludColor}" class="float-left icon-box rounded-circle">
+                                </div>
+
+                                <div *ngIf="selectedProject?.healthCheck != ''; else displayDefault">
+                                  <div style="display: inline-block;margin-left: 5px;">
+                                    <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.healthCheck"> Ver informe </a>
+                                  </div>
+                                </div>
+
+                                <ng-template #displayDefault>
+                                  <div style="display: inline-block;margin-left: 5px;">
+                                    <a style="text-decoration:underline!important;"> Ver informe </a>
+                                  </div>
+                                </ng-template>
+                              </a>
+                            </div>
+
+                            <div *ngIf="!selectedProject?.saludCalor">
+                              <h4>?</h4>
+                            </div>
+
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-2 col-lg-6 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <div class="float-right text-right">
+
+                            <p class="card-text text-dark">Payback</p>
+
+                            <div *ngIf="selectedProject?.payback">
+                              <h6>{{selectedProject?.payback}}</h6>
+                            </div>
+
+                            <div *ngIf="!selectedProject?.payback">
+                              <h4>?</h4>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+                <div class="row">
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <div class="float-right text-right">
+                            <p class="card-text text-dark">Estado proyecto</p>
+                            <div *ngIf="currentProjectState?.nombreEtapa">
+                              <div [ngClass]="getColorState(currentProjectState?.nombreEtapa)" style="border-radius: 20px;text-align: center;">{{currentProjectState?.nombreEtapa}}</div>
+                            </div>
+
+                            <div *ngIf="!currentProjectState?.nombreEtapa">
+                              <h4>?</h4>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <div class="float-right text-right">
+                            <p class="card-text text-dark">Fecha ultima modificacion</p>
+                            <div *ngIf="selectedProject?.fechaUltimaModificacion">
+                              <h6>{{selectedProject?.fechaUltimaModificacion}}</h6>
+                            </div>
+
+                            <div *ngIf="!selectedProject?.fechaUltimaModificacion">
+                              <h4>?</h4>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <div class="float-right text-right">
+                            <p class="card-text text-dark">Tamaño proyecto</p>
+                            <div *ngIf="selectedProject?.tamanoProyecto">
+                              <h6>{{selectedProject?.tamanoProyecto}}</h6>
+                            </div>
+
+                            <div *ngIf="!selectedProject?.tamanoProyecto">
+                              <h4>?</h4>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <div class="float-right text-right">
+
+                            <p class="card-text text-dark">FTEs asignados</p>
+
+                            <div *ngIf="selectedProject?.ftesAsignados">
+                              <h6>{{selectedProject?.ftesAsignados}}</h6>
+                            </div>
+
+                            <div *ngIf="!selectedProject?.ftesAsignados">
+                              <h4>?</h4>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="card card-statistics">
+                  <div class="card-body">
+                    <div class="row mb-40">
+                      <div class="col-md-6 sm-mb-20 text-center">
+                        <h5 class="card-title">Presupuesto (U$S)</h5>
+
+                        <div>
+                          <div style="position: absolute;margin-left: 65px;margin-top: 60px;" *ngFor="let sem of selectedProject?.semaforos;">
+
+                            <div *ngIf="sem.semFinColor == '#dc3545'">
+                              <h1 style="margin-top: -5px;"><i class="fa fa-circle text-danger"></i></h1>
+                            </div>
+
+                            <div *ngIf="sem.semFinColor == '#ffc107'">
+                              <h1 style="margin-top: -5px;"><i class="fa fa-circle text-warning"></i></h1>
+                            </div>
+
+                            <div *ngIf="sem.semFinColor == '#28a745'">
+                              <h1 style="margin-top: -5px;"><i class="fa fa-circle text-success"></i></h1>
+                            </div>
+
+                          </div>
+
+                          <div style="position: absolute;margin-left: 65px;margin-top: 60px;" *ngIf="selectedProject?.idSemFinan == null">
+                            <h6>?</h6>
+                          </div>
+
+                        </div>
+
+
+                        <div *ngIf="donaFinanciadoBudgetData[0] > 0 && donaFinanciadoBudgetData[1] > 0">
+                          <div style="display:block">
+
+                            <canvas width="250" height="150" baseChart class="round-chart big-chart mb-0"
+                                    [labels]="donaFinanciadoBudgetLabel"
+                                    [data]="donaFinanciadoBudgetData"
+                                    [options]="donaFinanciadoBudgetOptions"
+                                    [chartType]="donaFinanciadoBudgetChartType"
+                                    [colors]="donaFinanciadoBudgetColor"
+                                    [legend]="false"></canvas>
+
+                          </div>
+                        </div>
+
+
+                        <div *ngIf="donaFinanciadoBudgetData[0] <= 0 && donaFinanciadoBudgetData[1] <= 0">
+                          <div style="height:89px;margin-top:74px;">
+                            <h1>?</h1>
+                          </div>
+                        </div>
+
+                        <div>
+
+                          <div *ngIf="selectedProject?.linkPresupuestoFinanciero != ''">
+
+                            <div style="display:inline-flex">
+                              <div class="float-right text-right" style="margin-top: -36px;position: absolute;margin-left: 70px;">
+                                <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.linkPresupuestoFinanciero"> Ver informe </a>
+                              </div>
+                            </div>
+
+                          </div>
+
+                          <div *ngIf="selectedProject?.linkPresupuestoFinanciero == ''">
+
+                            <div style="display:inline-flex">
+                              <div class="float-right text-right" style="margin-top: -36px;position: absolute;margin-left: 100px;">
+                                <h6>?</h6>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div style="display:inline-flex">
+                            <div class="squardDona red"></div>
+                            <h3>{{donaFinanciadoBudgetLabel[0]}}</h3>
+                          </div>
+
+                          <div style="display:inline-flex">
+                            <div class="squardDona blue"></div>
+                            <h3>{{donaFinanciadoBudgetLabel[1]}}</h3>
+                          </div>
+
+                        </div>
+
+                        <div class="col-xl-12 col-lg-12 col-md-6 mt-15">
+                          <div class="card card-statistics">
+                            <div class="card-body">
+                              <div class="clearfix">
+                                <div class="text-left">
+
+                                  <div>
+                                    <div *ngIf="selectedProject?.presupuestoFinancPlanificado == null">
+                                      <h6>Planificado: ? </h6>
+                                    </div>
+
+                                    <div *ngIf="selectedProject?.presupuestoFinancPlanificado != null">
+                                      <div style="display:inline-flex">
+                                        <h6> Planificado: </h6>
+                                        <h4>U$S {{selectedProject?.presupuestoFinancPlanificado}}</h4>
+                                      </div>
+                                    </div>
+
+                                    <div style="display:inline-flex" *ngIf="selectedProject?.presupuestoFinancEjecutado == null">
+                                      <h6> Ejecutado: ? </h6>
+                                    </div>
+
+                                    <div style="display:inline-flex" *ngIf="selectedProject?.presupuestoFinancEjecutado != null">
+                                      <h6> Ejecutado: </h6> <h4>U$S {{ selectedProject?.presupuestoFinancEjecutado}}</h4>
+                                    </div>
+
+                                  </div>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+
+                      <div class="col-md-6 sm-mb-20 text-center">
+                        <h5 class="card-title">Tiempo(Meses)</h5>
+
+
+                        <div style="position: absolute;margin-left: 65px;margin-top: 60px;" *ngFor="let sem of selectedProject?.semaforos;">
+
+                          <div *ngIf="sem.semFechaColor == '#dc3545'">
+                            <h1 style="margin-top: -5px;"><i class="fa fa-circle text-danger"></i></h1>
+                          </div>
+
+                          <div *ngIf="sem.semFechaColor == '#ffc107'">
+
+                            <h1 style="margin-top: -5px;"><i class="fa fa-circle text-warning"></i></h1>
+
+                          </div>
+
+                          <div *ngIf="sem.semFechaColor == '#28a745'">
+
+                            <h1 style="margin-top: -5px;"><i class="fa fa-circle text-success"></i></h1>
+
+                          </div>
+                        </div>
+
+                        <div style="position: absolute;margin-left: 65px;margin-top: 60px;" *ngIf="selectedProject?.idSemFecha == null">
+                          <h6>?</h6>
+                        </div>
+
+                        <div *ngIf="donaFechaBudgetData[0] > 0 && donaFechaBudgetData[1] > 0">
+                          <div style="display:block">
+                            <canvas width="250" height="150" baseChart class="round-chart big-chart mb-0"
+                                    [labels]="donaFechaBudgetLabel"
+                                    [data]="donaFechaBudgetData"
+                                    [options]="donaFechaBudgetOptions"
+                                    [chartType]="donaFechaBudgetChartType"
+                                    [colors]="donaFechaBudgetColor"
+                                    [legend]="false"></canvas>
+                          </div>
+                        </div>
+
+                        <div *ngIf="donaFechaBudgetData[0] <= 0 && donaFechaBudgetData[1] <= 0">
+                          <div style="height:89px;margin-top:74px;">
+                            <h1>?</h1>
+                          </div>
+                        </div>
+
+
+                        <div *ngIf="selectedProject?.linkPresupuestoFecha != ''">
+
+                          <div style="display:inline-flex">
+                            <div class="float-right text-right" style="margin-top: -36px;position: absolute;margin-left: 70px;">
+                              <a target="_blank" style="text-decoration:underline!important;" [attr.href]="selectedProject?.linkPresupuestoFecha"> Ver informe </a>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div *ngIf="selectedProject?.linkPresupuestoFecha == ''">
+
+                          <div style="display:inline-flex">
+                            <div class="float-right text-right" style="margin-top: -36px;position: absolute;margin-left: 100px;">
+                              <h6>?</h6>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div>
+                          <div style="display:inline-flex">
+                            <div class="squardDona red"></div>
+                            <h3>{{donaFechaBudgetLabel[0]}}</h3>
+                          </div>
+
+                          <div style="display:inline-flex">
+                            <div class="squardDona blue"></div>
+                            <h3>{{donaFechaBudgetLabel[1]}}</h3>
+                          </div>
+
+                        </div>
+
+                        <div class="col-xl-12 col-lg-12 col-md-6 mt-15">
+                          <div class="card card-statistics h-100">
+                            <div class="card-body">
+                              <div class="clearfix">
+                                <div class="text-left">
+
+
+                                  <div>
+                                    <div *ngIf="selectedProject?.presupuestoFechaPlanificado == null">
+                                      <h6>Presupuestados: ? </h6>
+                                    </div>
+
+                                    <div style="display:inline-flex" *ngIf="selectedProject?.presupuestoFechaPlanificado != null">
+                                      <h6>Presupuestados: </h6> <h5> {{selectedProject?.presupuestoFechaPlanificado}}</h5>
+                                    </div>
+
+                                    <div style="display:inline-flex" *ngIf="selectedProject?.prespuestoFechaEjecutado == null">
+                                      <h6>Ejecutados: ? </h6>
+                                    </div>
+
+                                    <div *ngIf="selectedProject?.prespuestoFechaEjecutado != null">
+                                      <div style="display:inline-flex">
+                                        <h6>Ejecutados: </h6> <h5>{{selectedProject?.prespuestoFechaEjecutado}}</h5>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-3 mb-30">
+            <div class="card card-statistics ">
+              <div class="card-body">
+                <h5 class="card-title">Users role </h5>
+
+                <ul class="list-unstyled" style="max-height:378px;">
+
+                  <li class="mb-20" *ngFor="let proRol of projectRol;let i=index">
+
+                    <div class="media">
+                      <div class="media-body">
+
+                        <button style="cursor:help"  type="button" class="btn btn-secondary"
+                                [attr.data-toggle]="'popover' + i">
+                          {{proRol.descripcion}}
+                        </button>
+
+                        <div *ngIf="proRol?.nominado; else displayDefault">
+                          <p>{{proRol.nominado == '' ? '?' : proRol.nominado}}</p>
+                        </div>
+
+                        <ng-template #displayDefault>
+                          <p>?</p>
+                        </ng-template>
+
+                      </div>
+                    </div>
+                    <div class="divider mt-10"></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card card-statistics">
+              <div class="card-body">
+                <h5 class="card-title">Objetivos </h5>
+
+                <div class="ui-g-12">
+                  <div *ngIf="selectedProject?.objetivos.length == 0">
+                    <p> No se encontraron objetivos </p>
+                  </div>
+
+                  <p *ngFor="let objetivo of selectedProject?.objetivos">
+                    <i class="fa fa-angle-right fa-1x list"></i> {{objetivo.descripcion}}
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12 mb-20 mt-20">
+
+            <div class="card card-statistics h-20">
+              <div class="card-body">
+                <div class="d-block d-md-flex justify-content-between">
+
+                  <fieldset style="width: 100%;">
+                    <legend style="font-size: 1.2rem;font-weight: 600;">Estados del proyecto</legend>
+
+
+                    <div class="col-xl-12" style="display:inline-flex" id="removeUlStyle">
+
+                      <div class="marginState">
+
+                        <div style="display:inline-flex">
+                          <ul class="breadcrumbs-inception">
+                            <li><a>Inception</a></li>
+                          </ul>
+                        </div>
+
+
+                        <div style="margin-top:4%">
+                          <p>Inicio: {{fechaInicioInception}}</p>
+                          <p>Fin: {{fechaFinInception}}</p>
+                          <p>Avance: {{avanceInception}}</p>
+                          <p>Observaciones: {{observacionesInception}}</p>
+                          <ul>
+                            <li *ngFor="let entregaInception of entregablesInception">
+                              <div *ngIf="entregaInception?.obligatorio">
+
+                                <div *ngIf="!entregaInception.isFaltaDocumento">
+                                  <a target="_blank" [attr.href]="entregaInception?.urlDocumento">
+                                    {{entregaInception.nombreDocumento}}
+                                    <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                                  </a>
+                                </div>
+
+                                <div *ngIf="entregaInception.isFaltaDocumento">
+                                  {{entregaInception.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaInception.isFaltaDocumento"></i>
+                                </div>
+
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+
+                      </div>
+
+                      <div class="marginState">
+
+                        <div style="display:inline-flex">
+                          <ul class="breadcrumbs-rfp">
+                            <li><a>RFP/RFI</a></li>
+                          </ul>
+                        </div>
+
+
+                        <div style="margin-top:4%">
+                          <p>Inicio: {{fechaInicioRPF}}</p>
+                          <p>Fin: {{fechaFinRPF}}</p>
+                          <p>Avance: {{avanceRPF}}</p>
+                          <p>Observaciones: {{observacionesRPF}}</p>
+                          <ul>
+                            <li *ngFor="let entregaRPF of entregablesRPF">
+                              <div *ngIf="entregaRPF?.obligatorio">
+
+                                <div *ngIf="!entregaRPF.isFaltaDocumento">
+                                  <a target="_blank" [attr.href]="entregaRPF?.urlDocumento">
+                                    {{entregaRPF.nombreDocumento}}
+                                    <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                                  </a>
+                                </div>
+
+                                <div *ngIf="entregaRPF.isFaltaDocumento">
+                                  {{entregaRPF.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaRPF.isFaltaDocumento"></i>
+                                </div>
+
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+
+                      </div>
+
+
+
+                      <div class="marginState">
+
+                        <div style="display:inline-flex">
+                          <ul class="breadcrumbs-planning">
+                            <li><a>Planning</a></li>
+                          </ul>
+                        </div>
+
+                        <div style="margin-top:4%">
+                          <p>Inicio: {{fechaInicioPlanning}}</p>
+                          <p>Fin: {{fechaFinPlanning}}</p>
+                          <p>Avance: {{avancePlanning}}</p>
+                          <p>Observaciones: {{observacionesPlanning}}</p>
+                          <ul>
+                            <li *ngFor="let entregaPlanning of entregablesPlanning">
+                              <div *ngIf="entregaPlanning?.obligatorio">
+
+
+
+                                <div *ngIf="!entregaPlanning.isFaltaDocumento">
+                                  <a target="_blank" [attr.href]="entregaPlanning?.urlDocumento">
+                                    {{entregaPlanning.nombreDocumento}}
+                                    <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                                  </a>
+                                </div>
+
+                                <div *ngIf="entregaPlanning.isFaltaDocumento">
+                                  {{entregaPlanning.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaPlanning.isFaltaDocumento"></i>
+                                </div>
+
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+
+                      </div>
+
+                      <div class="marginState">
+
+                        <div style="display:inline-flex">
+                          <ul class="breadcrumbs-execution">
+                            <li><a>Execution</a></li>
+                          </ul>
+                        </div>
+
+
+                        <div style="margin-top:4%">
+                          <p>Inicio: {{fechaInicioExecution}}</p>
+                          <p>Fin: {{fechaFinExecution}}</p>
+                          <p>Avance: {{avanceExecution}}</p>
+                          <p>Observaciones: {{observacionesExecution}}</p>
+                          <ul>
+                            <li *ngFor="let entregaExecution of entregablesExecution">
+                              <div *ngIf="entregaExecution?.obligatorio">
+
+                                <div *ngIf="!entregaExecution.isFaltaDocumento">
+                                  <a target="_blank" [attr.href]="entregaExecution?.urlDocumento">
+                                    {{entregaExecution.nombreDocumento}}
+                                    <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                                  </a>
+                                </div>
+
+                                <div *ngIf="entregaExecution.isFaltaDocumento">
+                                  {{entregaExecution.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaExecution.isFaltaDocumento"></i>
+                                </div>
+
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+
+                      </div>
+
+                      <div class="marginState">
+
+                        <div style="display:inline-flex">
+                          <ul class="breadcrumbs-postGoLive">
+                            <li><a>Post Go Live</a></li>
+                          </ul>
+                        </div>
+
+
+                        <div style="margin-top:4%">
+                          <p>Inicio: {{fechaInicioPostGoLive}}</p>
+                          <p>Fin: {{fechaFinPostGoLive}}</p>
+                          <p>Avance: {{avancePostGoLive}}</p>
+                          <p>Observaciones: {{observacionesPostGoLive}}</p>
+                          <ul>
+                            <li *ngFor="let entregaPostGoLive of entregablesPostGoLive">
+                              <div *ngIf="entregaPostGoLive?.obligatorio">
+
+                                <div *ngIf="!entregaPostGoLive.isFaltaDocumento">
+                                  <a target="_blank" [attr.href]="entregaPostGoLive?.urlDocumento">
+                                    {{entregaPostGoLive.nombreDocumento}}
+                                    <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                                  </a>
+                                </div>
+
+                                <div *ngIf="entregaPostGoLive.isFaltaDocumento">
+                                  {{entregaPostGoLive.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaPostGoLive.isFaltaDocumento"></i>
+                                </div>
+
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+
+                      </div>
+
+                      <div class="marginState">
+
+                        <div style="display:inline-flex">
+                          <ul class="breadcrumbs-bau">
+                            <li><a>BAU</a></li>
+                          </ul>
+                        </div>
+
+
+                        <div style="margin-top:4%">
+                          <p>Inicio: {{fechaInicioBAU}}</p>
+                          <p>Fin: {{fechaFinBAU}}</p>
+                          <p>Avance: {{avanceBAU}}</p>
+                          <p>Observaciones: {{observacionesBAU}}</p>
+                          <ul>
+                            <li *ngFor="let entregaBAU of entregablesBAU">
+                              <div *ngIf="entregaBAU?.obligatorio">
+
+                                <div *ngIf="!entregaBAU.isFaltaDocumento">
+                                  <a target="_blank" [attr.href]="entregaBAU?.urlDocumento">
+                                    {{entregaBAU.nombreDocumento}}
+                                    <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                                  </a>
+                                </div>
+
+                                <div *ngIf="entregaBAU.isFaltaDocumento">
+                                  {{entregaBAU.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaBAU.isFaltaDocumento"></i>
+                                </div>
+
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+
+                      </div>
+
+                      <div class="marginState">
+
+                        <div style="display:inline-flex">
+                          <ul class="breadcrumbs-benefits">
+                            <li><a><span>Benefits</span> management</a></li>
+                          </ul>
+                        </div>
+
+
+                        <div style="margin-top:4%">
+                          <p>Inicio: {{fechaInicioBenefits}}</p>
+                          <p>Fin: {{fechaFinBenefits}}</p>
+                          <p>Avance: {{avanceBenefits}}</p>
+                          <p>Observaciones: {{observacionesBenefits}}</p>
+                          <ul class="removeUlStyle">
+                            <li *ngFor="let entregaBenefits of entregablesBenefits">
+                              <div *ngIf="entregaBenefits?.obligatorio">
+
+                                <div *ngIf="!entregaBenefits.isFaltaDocumento">
+                                  <a target="_blank" [attr.href]="entregaBenefits?.urlDocumento">
+                                    {{entregaBenefits.nombreDocumento}}
+                                    <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                                  </a>
+                                </div>
+
+                                <div *ngIf="entregaBenefits.isFaltaDocumento">
+                                  {{entregaBenefits.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaBenefits.isFaltaDocumento"></i>
+                                </div>
+
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </fieldset>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-12 mb-10">
+            <div class="card card-statistics h-100">
+              <div class="card-body">
+
+                <main>
+
+                  <input id="tab1" type="radio" name="tabs" checked>
+                  <label for="tab1">Risks</label>
+
+                  <input id="tab2" type="radio" name="tabs">
+                  <label for="tab2">Issues</label>
+
+                  <input id="tab3" type="radio" name="tabs">
+                  <label for="tab3">Equipo</label>
+
+                  <input id="tab4" type="radio" name="tabs">
+                  <label for="tab4">Units</label>
+
+                  <input id="tab5" type="radio" name="tabs">
+                  <label for="tab5">Areas afectadas</label>
+
+                  <input id="tab6" type="radio" name="tabs">
+                  <label for="tab6">Proveedores</label>
+
+                  <input id="tab7" type="radio" name="tabs">
+                  <label for="tab7">Actividades retrasadas</label>
+
+                  <input id="tab8" type="radio" name="tabs">
+                  <label for="tab8">Próximas actividades</label>
+
+                  <input id="tab9" type="radio" name="tabs">
+                  <label for="tab9">Documentos</label>
+
+                  <section id="content1">
+                    <div *ngIf="selectedProject?.riesgos.length == 0">
+                      <p> No se encontraron riesgos </p>
+                    </div>
+
+                    <p *ngFor="let riesgo of selectedProject?.riesgos">
+                      <i class="fa fa-angle-right fa-1x list"></i> {{riesgo.descripcion}}
+                    </p>
+                  </section>
+
+                  <section id="content2">
+                    <div *ngIf="selectedProject?.issues.length == 0">
+                      <p> No se encontraron issues </p>
+                    </div>
+
+                    <p *ngFor="let issues of selectedProject?.issues">
+                      <i class="fa fa-angle-right fa-1x list"></i> {{issues.descripcion}}
+                    </p>
+                  </section>
+
+                  <section id="content3">
+
+                    <div *ngIf="selectedProject?.equiposPorProyecto.length == 0">
+                      <p> No se encontraron equipos </p>
+                    </div>
+
+                    <div *ngIf="selectedProject?.equiposPorProyecto.length > 0">
+                      <div class="row">
+                        <div class="card card-statistics">
+                          <div class="card-body">
+                            <div class="col-xl-12">
+                              <p-table [columns]="teamColums" [value]="listTeamProject"
+                                       sortMode="single"
+                                       dataKey="idEquipoPorProyecto"
+                                       [paginator]="true"
+                                       [rows]="50"
+                                       [pageLinks]="3"
+                                       [rowsPerPageOptions]="[50,75,100]"
+                                       [totalRecords]="totalTeamProjectRecords"
+                                       [globalFilterFields]="['nombre','rol']"
+                                       #dt>
+                                <ng-template pTemplate="header" let-columns>
+                                  <tr>
+                                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                      <strong>{{col.header}}</strong>
+                                      <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                                                  ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                                    </th>
+
+                                  </tr>
+                                </ng-template>
+
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                  <tr>
+                                    <td *ngFor="let col of columns">
+                                      <div>
+                                        {{rowData[col.field]}}
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </ng-template>
+
+
+                              </p-table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!--<div *ngFor="let team of selectedProject?.equiposPorProyecto">
+                      <p>Nombre: {{team.nombre}} </p> <p> Rol:  {{team.rol}} </p>
+                    </div>-->
+
+                  </section>
+
+                  <section id="content4">
+                    <div>
+                      <b>Units:</b>
+                      <p>
+                        <i class="fa fa-check" *ngIf="selectedProject?.unidadArt"></i> <i class="fa fa-times text-danger" *ngIf="!selectedProject?.unidadArt"></i>
+                        Asociart
+                      </p>
+                      <p>
+                        <i class="fa fa-check" *ngIf="selectedProject?.unidadSegArg"></i> <i class="fa fa-times text-danger" *ngIf="!selectedProject?.unidadSegArg"></i>
+                        Seguros Argentina
+                      </p>
+                      <p>
+                        <i class="fa fa-check" *ngIf="selectedProject?.unidadSegUru"></i> <i class="fa fa-times text-danger" *ngIf="!selectedProject?.unidadSegUru"></i>
+                        Seguros Uruguay
+                      </p>
+                      <p>
+                        <i class="fa fa-check" *ngIf="selectedProject?.unidadRetiro"></i> <i class="fa fa-times text-danger" *ngIf="!selectedProject?.unidadRetiro"></i>
+                        Retiro
+                      </p>
+                      <p>
+                        <i class="fa fa-check" *ngIf="selectedProject?.unidadCajaMutual"></i> <i class="fa fa-times text-danger" *ngIf="!selectedProject?.unidadCajaMutual"></i>
+                        Caja Mutual
+                      </p>
+                      <p>
+                        <i class="fa fa-check" *ngIf="selectedProject?.unidadServFinanciero"></i> <i class="fa fa-times text-danger" *ngIf="!selectedProject?.unidadServFinanciero"></i>
+                        Servicios Financieros
+                      </p>
+                      <p>
+                        <i class="fa fa-check" *ngIf="selectedProject?.unidadTurismo"></i> <i class="fa fa-times text-danger" *ngIf="!selectedProject?.unidadTurismo"></i>
+                        Viajes y Turismo
+                      </p>
+                      <p>
+                        <i class="fa fa-check" *ngIf="selectedProject?.unidadAsoServ"></i> <i class="fa fa-times text-danger" *ngIf="!selectedProject?.unidadAsoServ"></i>
+                        Asociación Servicios
+                      </p>
+                    </div>
+
+                  </section>
+
+                  <section id="content5">
+                    <div *ngIf="selectedProject?.proyectoAreasAfetadas.length == 0">
+                      <p> No se encontraron areas afectadas </p>
+                    </div>
+
+                    <div *ngFor="let areaAfectada of selectedProject?.proyectoAreasAfetadas">
+                      <i class="fa fa-angle-right fa-1x list"></i> {{areaAfectada.nombre}}
+                    </div>
+                  </section>
+
+                  <section id="content6">
+                    <div *ngIf="selectedProject?.proyectoProveedor.length == 0">
+                      <p> No se encontraron proveedores </p>
+                    </div>
+
+                    <p *ngFor="let proveedor of selectedProject?.proyectoProveedor">
+                      <i class="fa fa-angle-right fa-1x list"></i> {{proveedor.nombre}}
+                    </p>
+                  </section>
+
+                  <section id="content7">
+
+                    <div *ngIf="selectedProject?.listActivitiesDelayed.length == 0">
+                      <p> No se encontraron actividades retrasadas </p>
+                    </div>
+
+                    <div *ngIf="selectedProject?.actividades.length > 0">
+                      <div class="row">
+                        <div class="card card-statistics">
+                          <div class="card-body">
+                            <div class="col-xl-12">
+                              <p-table [columns]="activitiesColums" [value]="listActivitiesDelayed"
+                                       sortMode="single"
+                                       dataKey="idActividad"
+                                       [paginator]="true"
+                                       [rows]="50"
+                                       [pageLinks]="3"
+                                       [rowsPerPageOptions]="[50,75,100]"
+                                       [totalRecords]="totalActivitiesRecords"
+                                       [globalFilterFields]="['descripcion','responsable']"
+                                       #dt>
+                                <ng-template pTemplate="header" let-columns>
+                                  <tr>
+                                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                      <strong>{{col.header}}</strong>
+                                      <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                                                  ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                                    </th>
+
+                                  </tr>
+                                </ng-template>
+
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                  <tr>
+                                    <td *ngFor="let col of columns">
+                                      <div>
+                                        {{rowData[col.field]}}
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </ng-template>
+
+
+                              </p-table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </section>
+
+                  <section id="content8">
+
+                    <div *ngIf="selectedProject?.listActivitiesFuture.length == 0">
+                      <p> No se encontraron próximas actividades </p>
+                    </div>
+
+                    <div *ngIf="selectedProject?.listActivitiesFuture.length > 0">
+                      <div class="row">
+                        <div class="card card-statistics">
+                          <div class="card-body">
+                            <div class="col-xl-12">
+                              <p-table [columns]="activitiesColums" [value]="listActivitiesFuture"
+                                       sortMode="single"
+                                       dataKey="idActividad"
+                                       [paginator]="true"
+                                       [rows]="50"
+                                       [pageLinks]="3"
+                                       [rowsPerPageOptions]="[50,75,100]"
+                                       [totalRecords]="totalActivitiesFutureRecords"
+                                       [globalFilterFields]="['descripcion','responsable']"
+                                       #dt>
+                                <ng-template pTemplate="header" let-columns>
+                                  <tr>
+                                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                      <strong>{{col.header}}</strong>
+                                      <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                                                  ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                                    </th>
+
+                                  </tr>
+                                </ng-template>
+
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                  <tr>
+                                    <td *ngFor="let col of columns">
+                                      <div>
+                                        {{rowData[col.field]}}
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </ng-template>
+
+
+                              </p-table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </section>
+
+                  <section id="content9">
+                    <div class="col-xl-12 mb-30">
+
+                      <div class="accordion plus-icon shadow">
+
+                        <div *ngFor="let projectState of stateFiltered; let i=index" class="acd-group" [attr.id]="'wrapDiv' + i">
+                          <a href="javascript:void(0);" [ngClass]="['acd-heading', getClasses('customAccordionHeader_'+projectState.nombreEtapa)]"
+                             (click)="OpenAccordion('submenu'+ i,'wrapDiv'+i)">{{projectState.nombreEtapa}}</a>
+
+                          <div class="acd-des" [attr.id]="'submenu' + i">
+                            <div *ngFor="let document of selectedProject.proyectoEtapaDocumentos;">
+                              <div class="form-inline" *ngIf="document.idEtapa == projectState.idEtapa">
+                                <div class="col-md-3">
+                                  <a *ngIf="!document.isFaltaDocumento" target="_blank" [attr.href]="document?.urlDocumento">{{document.nombreDocumento }}<i class="fa fa-download fa-1x"></i></a>
+                                  <span *ngIf="document.isFaltaDocumento">{{document.nombreDocumento +' '}}<i class="fa fa-times text-danger fa-1x"></i></span>
+
+                                </div>
+
+
+                                <div *ngIf="isEditing" class="form-group col-md-6">
+                                  <input type="text" class="form-control form-control-sm" [(ngModel)]="document.urlDocumento" value="{{document.urlDocumento}}"
+                                         placeholder="Url">
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </section>
+
+                </main>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="text-center">
+          <button class="btn btn-info"> <a style="text-decoration:none;color:white" routerLink="home"> <i class="fa fa-arrow-left"></i> Volver </a></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,288 @@
+<div class="card card-statistics h-20" *ngIf="!isEditing">
+  <div class="card-body">
+    <div class="buttons-panel">
+      <div *ngIf="!isEditing && userRol == 'admin'">
+        <a class="pr-2" href="javascript:void(0)" (click)="editMode()"><i class="fa fa-pencil"></i></a>
+      </div>
+    </div>
+    <div class="d-block d-md-flex justify-content-between">
+
+      <fieldset style="width: 100%;">
+        <legend style="font-size: 1.2rem;font-weight: 600;">Estados del proyecto</legend>
+
+
+        <div class="col-xl-12" style="display:inline-flex" id="removeUlStyle">
+
+          <div class="marginState">
+
+            <div style="display:inline-flex">
+              <ul class="breadcrumbs-inception">
+                <li><a>Inception</a></li>
+              </ul>
+            </div>
+
+
+            <div style="margin-top:4%">
+              <p>Inicio: {{fechaInicioInception}}</p>
+              <p>Fin: {{fechaFinInception}}</p>
+              <p>Avance: {{avanceInception}}</p>
+              <p>Observaciones: {{observacionesInception}}</p>
+              <ul>
+                <li *ngFor="let entregaInception of entregablesInception">
+                  <div *ngIf="entregaInception?.obligatorio">
+
+
+
+                    <div *ngIf="!entregaInception.isFaltaDocumento">
+                      <a target="_blank" [attr.href]="entregaInception?.urlDocumento">
+                        {{entregaInception.nombreDocumento}}
+                        <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                      </a>
+                    </div>
+
+                    <div *ngIf="entregaInception.isFaltaDocumento">
+                      {{entregaInception.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaInception.isFaltaDocumento"></i>
+                    </div>
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="marginState">
+
+            <div style="display:inline-flex">
+              <ul class="breadcrumbs-rfp">
+                <li><a>RFP/RFI</a></li>
+              </ul>
+            </div>
+
+
+            <div style="margin-top:4%">
+              <p>Inicio: {{fechaInicioRPF}}</p>
+              <p>Fin: {{fechaFinRPF}}</p>
+              <p>Avance: {{avanceRPF}}</p>
+              <p>Observaciones: {{observacionesRPF}}</p>
+              <ul>
+                <li *ngFor="let entregaRPF of entregablesRPF">
+                  <div *ngIf="entregaRPF?.obligatorio">
+
+
+                    <div *ngIf="!entregaRPF.isFaltaDocumento">
+                      <a target="_blank" [attr.href]="entregaRPF?.urlDocumento">
+                        {{entregaRPF.nombreDocumento}}
+                        <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                      </a>
+                    </div>
+
+                    <div *ngIf="entregaRPF.isFaltaDocumento">
+                      {{entregaRPF.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaRPF.isFaltaDocumento"></i>
+                    </div>
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="marginState">
+
+            <div style="display:inline-flex">
+              <ul class="breadcrumbs-planning">
+                <li><a>Planning</a></li>
+              </ul>
+            </div>
+
+            <div style="margin-top:4%">
+              <p>Inicio: {{fechaInicioPlanning}}</p>
+              <p>Fin: {{fechaFinPlanning}}</p>
+              <p>Avance: {{avancePlanning}}</p>
+              <p>Observaciones: {{observacionesPlanning}}</p>
+              <ul>
+                <li *ngFor="let entregaPlanning of entregablesPlanning">
+                  <div *ngIf="entregaPlanning?.obligatorio">
+                    <div *ngIf="!entregaPlanning.isFaltaDocumento">
+                      <a target="_blank" [attr.href]="entregaPlanning?.urlDocumento">
+                        {{entregaPlanning.nombreDocumento}}
+                        <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                      </a>
+                    </div>
+
+                    <div *ngIf="entregaPlanning.isFaltaDocumento">
+                      {{entregaPlanning.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaPlanning.isFaltaDocumento"></i>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="marginState">
+
+            <div style="display:inline-flex">
+              <ul class="breadcrumbs-execution">
+                <li><a>Execution</a></li>
+              </ul>
+            </div>
+
+
+            <div style="margin-top:4%">
+              <p>Inicio: {{fechaInicioExecution}}</p>
+              <p>Fin: {{fechaFinExecution}}</p>
+              <p>Avance: {{avanceExecution}}</p>
+              <p>Observaciones: {{observacionesExecution}}</p>
+              <ul>
+                <li *ngFor="let entregaExecution of entregablesExecution">
+                  <div *ngIf="entregaExecution?.obligatorio">
+
+                    <div *ngIf="!entregaExecution.isFaltaDocumento">
+                      <a target="_blank" [attr.href]="entregaExecution?.urlDocumento">
+                        {{entregaExecution.nombreDocumento}}
+                        <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                      </a>
+                    </div>
+
+                    <div *ngIf="entregaExecution.isFaltaDocumento">
+                      {{entregaExecution.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaExecution.isFaltaDocumento"></i>
+                    </div>
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="marginState">
+
+            <div style="display:inline-flex">
+              <ul class="breadcrumbs-postGoLive">
+                <li><a>Post Go Live</a></li>
+              </ul>
+            </div>
+
+
+            <div style="margin-top:4%">
+              <p>Inicio: {{fechaInicioPostGoLive}}</p>
+              <p>Fin: {{fechaFinPostGoLive}}</p>
+              <p>Avance: {{avancePostGoLive}}</p>
+              <p>Observaciones: {{observacionesPostGoLive}}</p>
+              <ul>
+                <li *ngFor="let entregaPostGoLive of entregablesPostGoLive">
+                  <div *ngIf="entregaPostGoLive?.obligatorio">
+
+                    <div *ngIf="!entregaPostGoLive.isFaltaDocumento">
+                      <a target="_blank" [attr.href]="entregaPostGoLive?.urlDocumento">
+                        {{entregaPostGoLive.nombreDocumento}}
+                        <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                      </a>
+                    </div>
+
+                    <div *ngIf="entregaPostGoLive.isFaltaDocumento">
+                      {{entregaPostGoLive.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaPostGoLive.isFaltaDocumento"></i>
+                    </div>
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="marginState">
+
+            <div style="display:inline-flex">
+              <ul class="breadcrumbs-bau">
+                <li><a>BAU</a></li>
+              </ul>
+            </div>
+
+
+            <div style="margin-top:4%">
+              <p>Inicio: {{fechaInicioBAU}}</p>
+              <p>Fin: {{fechaFinBAU}}</p>
+              <p>Avance: {{avanceBAU}}</p>
+              <p>Observaciones: {{observacionesBAU}}</p>
+              <ul>
+                <li *ngFor="let entregaBAU of entregablesBAU">
+                  <div *ngIf="entregaBAU?.obligatorio">
+
+                    <div *ngIf="!entregaBAU.isFaltaDocumento">
+                      <a target="_blank" [attr.href]="entregaBAU?.urlDocumento">
+                        {{entregaBAU.nombreDocumento}}
+                        <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                      </a>
+                    </div>
+
+                    <div *ngIf="entregaBAU.isFaltaDocumento">
+                      {{entregaBAU.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaBAU.isFaltaDocumento"></i>
+                    </div>
+                    
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="marginState">
+
+            <div style="display:inline-flex">
+              <ul class="breadcrumbs-benefits">
+                <li><a><span>Benefits</span> management</a></li>
+              </ul>
+            </div>
+
+
+            <div style="margin-top:4%">
+              <p>Inicio: {{fechaInicioBenefits}}</p>
+              <p>Fin: {{fechaFinBenefits}}</p>
+              <p>Avance: {{avanceBenefits}}</p>
+              <p>Observaciones: {{observacionesBenefits}}</p>
+              <ul class="removeUlStyle">
+                <li *ngFor="let entregaBenefits of entregablesBenefits">
+                  <div *ngIf="entregaBenefits?.obligatorio">
+
+                    <div *ngIf="!entregaBenefits.isFaltaDocumento">
+                      <a target="_blank" [attr.href]="entregaBenefits?.urlDocumento">
+                        {{entregaBenefits.nombreDocumento}}
+                        <i style="color:forestgreen!important;" class="fa fa-check"></i>
+                      </a>
+                    </div>
+
+                    <div *ngIf="entregaBenefits.isFaltaDocumento">
+                      {{entregaBenefits.nombreDocumento}} <i class="fa fa-times text-danger" *ngIf="entregaBenefits.isFaltaDocumento"></i>
+                    </div>
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </fieldset>
+    </div>
+
+
+
+  </div>
+</div>
+
+<div *ngIf="isEditing">
+  <div class="card card-statistics h-100">
+    <div class="card-body">
+      <div class="buttons-panel">
+
+
+
+      </div>
+      <app-edit-tabs [selectedProject]="selectedProject" (cancelEdit)="cancelChanges()" (emitChanges)="editedStates($event)"></app-edit-tabs>
+    </div>
+  </div>
+</div>

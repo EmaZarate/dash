@@ -1,0 +1,46 @@
+
+.buttons-panel{
+  text-align: right;
+  font-size: 20px;
+  float:right;
+  display: contents;
+}
+.acd-des {
+    display: none;
+  }
+  
+    .acd-des.show {
+      display: block;
+    }
+  
+  :host /deep/ .accordion.shadow {
+    box-shadow: none !important;
+  }
+  
+  .customAccordionHeader_Planning {
+    background: #FFD966 !important;
+  }
+
+.customAccordionHeader_Execution {
+  background: #b83aeaad !important;
+}
+  
+  .customAccordionHeader_RFPRFI {
+    background: #A9D18E !important;
+  }
+  
+  .customAccordionHeader_Inception {
+    background: #8FAADC !important;
+  }
+  
+  .customAccordionHeader_PostGoLive {
+    background: #F4B183 !important;
+  }
+  
+  .customAccordionHeader_BAU {
+    background: #767171 !important;
+  }
+  
+  .customAccordionHeader_Benefitsmanagement {
+    background: #FFC000 !important;
+  }

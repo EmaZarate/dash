@@ -1,0 +1,43 @@
+<div  class="card card-statistics " style="max-height:518.5px;">
+
+  <div class="card-body">
+    <div class="buttons-panel">
+      <div *ngIf="!isEditing && userRol == 'admin'">
+        <a class="pr-2" href="javascript:void(0)" (click)="editMode()"><i class="fa fa-pencil"></i></a>
+      </div>
+      <div *ngIf="isEditing">
+        <a class="pr-2" href="javascript:void(0)" (click)="cancelChanges()"><i class="fa fa-times"></i></a>
+        <a class="pr-2" href="javascript:void(0)" (click)="saveChanges()"><i class="fa fa-save"></i></a>
+      </div>
+    </div>
+    <h5 class="card-title">Users role </h5>
+    <ul class="list-unstyled" >
+      <li class="mb-20" *ngFor="let proRol of projectRol let i=index">
+        <div class="media">
+          <div *ngIf="!isEditing" class="media-body">
+
+            <button style="cursor:help" type="button" class="btn btn-secondary"
+                    [attr.data-toggle]="'popover' + i">
+              {{proRol.descripcion}}
+            </button>
+
+
+            <div *ngIf="proRol?.nominado; else displayDefault">
+              <p>{{proRol.nominado == '' ? '?' : proRol.nominado}}</p>
+            </div>
+
+            <ng-template #displayDefault>
+              <p>?</p>
+            </ng-template>
+
+          </div>
+          <div *ngIf="isEditing" class="media-body">
+              <h6 class="mt-0 text-info">{{proRol.descripcion}}</h6>
+              <input [(ngModel)]="roles[proRol.idRol]" type="text" class="form-control form-control-sm height-input" id="roles{{proRol.idRol}}" value="{{proRol.nominado}}">
+            </div>
+        </div>
+        <div class="divider mt-10"></div>
+      </li>
+    </ul>
+  </div>
+</div>

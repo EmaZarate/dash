@@ -1,0 +1,45 @@
+<div class="buttons-panel">
+    <div *ngIf="!isEditing && userRol == 'admin'">
+      <a class="pr-2" href="javascript:void(0)" (click)="editMode()"><i class="fa fa-pencil"></i></a>
+    </div>
+    <div *ngIf="isEditing">
+      <a class="pr-2" href="javascript:void(0)" (click)="cancelChanges()"><i class="fa fa-times"></i></a>
+      <a class="pr-2" href="javascript:void(0)" (click)="saveChanges()"><i class="fa fa-save"></i></a>
+    </div>
+  </div>
+  
+<div class="col-xl-10 mb-30" style="margin-left: 10%;">
+  <div class="accordion plus-icon shadow">
+    <div *ngFor="let projectState of stateFiltered ; let i=index" class="acd-group" [attr.id]="'wrapDiv' + i">
+      <a href="javascript:void(0);" [ngClass]="['acd-heading', getClasses('customAccordionHeader_'+projectState.nombreEtapa)]"
+        (click)="OpenAccordion('submenu'+ i,'wrapDiv'+i)">{{projectState.nombreEtapa}}</a>
+
+      <div class="acd-des" [attr.id]="'submenu' + i">
+        <div *ngFor="let document of selectedProject.proyectoEtapaDocumentos;">
+          <div class="form-inline" *ngIf="document.idEtapa == projectState.idEtapa">
+
+            <div *ngIf="!document.isFaltaDocumento" class="col-md-12" style="display:inline-flex">
+              <a target="_blank" [attr.href]="document?.urlDocumento" style="margin-top: 10px;">{{document.nombreDocumento }}<i class="fa fa-download fa-1x"></i></a>
+              <div *ngIf="isEditing">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="document.urlDocumento" value="{{document.urlDocumento}}" placeholder="Url">
+              </div>
+            </div>
+
+            <div *ngIf="isEditing">
+
+              <div *ngIf="document.isFaltaDocumento">
+                <div class="col-md-12">
+                  <span>{{document.nombreDocumento +' '}}<i class="fa fa-times text-danger fa-1x"></i></span>
+                  <input type="text" class="form-control form-control-sm" [(ngModel)]="document.urlDocumento" value="{{document.urlDocumento}}" placeholder="Url">
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

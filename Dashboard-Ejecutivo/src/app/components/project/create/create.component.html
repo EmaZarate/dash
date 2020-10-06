@@ -1,0 +1,4 @@
+<button style="margin-right: 10px;" type="button" class="btn btn-xs btn-info margin-icon-buttons" title="Nuevo proyecto" (click)="createProject()" [disabled]="isLoading">
+  <i *ngIf="!isLoading" class="fa fa-lg fa-plus" aria-hidden="true"></i>
+  {{ !isLoading ? 'Nuevo Proyecto' : 'Creando proyecto '}} <i *ngIf="isLoading" class="fa fa-spin fa-spinner"></i>
+</button>

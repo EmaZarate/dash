@@ -1,0 +1,42 @@
+
+<div class="col-8 offset-2 card card-statistics">
+  <div class="card-body">
+    <div class="row">
+
+      <div class="col-md-8 offset-2">
+
+        <form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group input-form">
+                <input type="text" class="form-control" formControlName="name" maxlength="100"
+                       placeholder="Nombre.." aria-describedby="basic-addon2">
+              </div>
+
+              <div class="form-group input-form">
+                <select class="form-control" id="state" style="height:3.5rem" required  formControlName="state">
+                  <option value="" disabled selected>Seleccione un estado...</option>
+                  <option *ngFor="let field of _stateFields" [value]="field.idEtapa">{{field.nombreEtapa}}</option>
+                </select>
+              </div>
+
+              <div class="form-group input-form">
+                <div class="custom-control custom-checkbox" style="margin-top: 2px;">
+                  <input type="checkbox" class="custom-control-input" id="required" formControlName="required" [checked]="false">
+                  <label class="custom-control-label" for="required">Obligatorio</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:20px">
+            <button class="btn btn-success" style="margin-right: 10px;" type="submit">{{isCreate ? 'Agregar ' : 'Actualizar'}}</button>
+            <button class="btn btn-danger" [routerLink]="['/home/documents']" type="button">Cancelar</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

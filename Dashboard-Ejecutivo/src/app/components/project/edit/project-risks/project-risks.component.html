@@ -1,0 +1,63 @@
+<div class="buttons-panel">
+  <div *ngIf="!isEditing && userRol=='admin'">
+    <a class="pr-2" href="javascript:void(0)" (click)="editMode()"><i class="fa fa-pencil"></i></a>
+  </div>
+  <div *ngIf="isEditing">
+    <a class="pr-2" href="javascript:void(0)" (click)="cancelChanges()"><i class="fa fa-times"></i></a>
+    <a class="pr-2" href="javascript:void(0)" (click)="saveChanges()"><i class="fa fa-save"></i></a>
+  </div>
+</div>
+
+<div *ngIf="!isEditing">
+  <div *ngIf="!data || data.length == 0">
+    <p> No se encontraron {{title}} </p>
+  </div>
+
+  <p *ngFor="let item of data">
+    <i class="fa fa-angle-right fa-1x list"></i> {{item.descripcion}}
+  </p>
+</div>
+
+<div *ngIf="isEditing">
+    <div class="row">
+        <div class="table-responsive col-md-6">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th>{{title}}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data">
+                <td>{{item.descripcion}}</td>
+                <td>
+                  <a class="pr-2" href="javascript:void(0)" (click)="editRow(item.id, item.tempId)"><i class="fa fa-pencil"></i></a>
+                  <a class="pr-2" href="javascript:void(0)" (click)="deleteRow(item.id, item.tempId)"><i class="fa fa-trash"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-6">
+          <a *ngIf="!isEditingData && !isAddingData" (click)="newRow()" class="pr-2 add-row-button" href="javascript:void(0)"><i
+              class="fa fa-plus"></i></a>
+          <div *ngIf="isEditingData || isAddingData" class="form-group">
+            <!-- <input [(ngModel)]="newObjetivo" type="text" class="form-control"> -->
+            <label for="">{{isAddingData ? 'Nuevo ' + title : 'Actualizar ' + title}}</label>
+            <div class="input-group">
+              <input type="text" class="form-control" [(ngModel)]="newData.descripcion" value="{{newData.descripcion}}"
+                placeholder="Nuevo {{title}}" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-success" (click)="addData()" type="button"><i class="fa fa-check"></i></button>
+                <button class="btn btn-danger" (click)="cancelEdition()" type="button"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+</div>
+

@@ -1,0 +1,84 @@
+
+<div class="row">
+  <div class="card card-statistics">
+    <div class="card-body" style="display:inline-flex">
+      <div class="col-xl-8 offset-2">
+        <p-table [columns]="documentColumns" [value]="listDocuments"
+                 sortMode="single"
+                 dataKey="idDocumento"
+                 [paginator]="true"
+                 [rows]="5"
+                 [pageLinks]="3"
+                 [rowsPerPageOptions]="[5,50,100]"
+                 [totalRecords]="totalDocumentsRecords"
+                 (sortFunction)="customSort($event)"
+                 [customSort]="true"
+                 #dt>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                <strong>{{col.header}}</strong>
+                <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                            ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+              </th>
+
+              <th style="width: 8em;text-align:center;">
+                <button type="button" class="btn btn-xs btn-info margin-icon-buttons" title="New" [routerLink]="['/home/documents/new']" *ngIf="userRol == 'admin'">
+                  <i class="fa fa-lg fa-plus" aria-hidden="true"></i>
+                </button>
+              </th>
+
+            </tr>
+
+            <tr>
+              <td *ngFor="let col of columns" [ngSwitch]="col.field" style="border: 1px solid #c8c8c8;font-weight: 700;color: #333333;background-color: #f4f4f4;padding:2px">
+                <input *ngSwitchCase="'name'" id="name" [(ngModel)]="nameFilter" class="form-control filterInput filterInputSearch" placeholder="Filter..." pInputText type="text" (input)="dt.filter($event.target.value, 'name', 'contains')">
+                <p-dropdown *ngSwitchCase="'state'" id="state" [(ngModel)]="stateFilter" class="filterDropDownSearch" placeholder="All" [style]="{'width':'100%'}" [options]="stateOptionsFilter" (onChange)="onDropDownChange($event, dt)"></p-dropdown>
+                <p-dropdown *ngSwitchCase="'required'" id="required" [(ngModel)]="requiredFilter" class="filterDropDownSearch" placeholder="All" [style]="{'width':'100%'}" [options]="requiredOptionsFilter" (onChange)="onDropDownChange($event, dt)"></p-dropdown>
+              </td>
+
+              <td style="width: 11em;
+                            padding: 0.571em 0.857em;
+                            border-left: 1px solid #c8c8c8;
+                            border-right: 1px solid #c8c8c8;
+                            font-weight: 700;
+                            color: #333333;
+                            background-color: #f4f4f4;
+                            text-align:center"></td>
+            </tr>
+
+
+
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+
+              <td *ngFor="let col of columns" [ngClass]="rowData[col.field] == 'RFP/RFI' ? 'colorEstadoRPF' : rowData[col.field] == 'Inception' ? 'colorEstadoIncept' : rowData[col.field] == 'Planning' ? 'colorEstadoPlann' : rowData[col.field] == 'Execution' ? 'colorEstadoExec' : rowData[col.field] == 'Post Go Live' ? 'colorEstadoPost' : rowData[col.field] == 'BAU' ? 'colorEstadoB  p-3 mb-2 bg-primary text-white' : rowData[col.field] == 'Benefits management' ? 'colorEstadoBenefits' : null">
+                  {{rowData[col.field]}}
+              </td>
+
+
+              <td style="text-align:center">
+                <button type="button" *ngIf="userRol == 'admin'" class="btn btn-xs btn-info margin-icon-buttons" style="margin-right:2px"
+                        title="Edit" [routerLink]="['/home/documents/edit', rowData.idDocumento]">
+                  <i class="fa fa-lg fa-pencil"
+                     aria-hidden="true"></i>
+                </button>
+                <button type="button" *ngIf="userRol == 'admin'" class="btn btn-xs btn-danger margin-icon-buttons" style="margin-right:2px"
+                        title="Delete" (click)="deleteDocument(rowData.idDocumento)">
+                  <i class="fa fa-lg fa-trash" aria-hidden="true"></i>
+                </button>
+              </td>
+
+
+            </tr>
+          </ng-template>
+
+
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+

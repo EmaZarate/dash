@@ -1,0 +1,512 @@
+<div class="buttons-panel">
+
+    <a class="pr-2" href="javascript:void(0)" (click)="cancelChanges()"><i class="fa fa-times"></i></a>
+    <a class="pr-2" href="javascript:void(0)" (click)="saveChanges()"><i class="fa fa-save"></i></a>
+
+</div>
+<div class="tab nav-bt">
+  <ngb-tabset>
+
+    <ngb-tab title="Inception">
+      <ng-template ngbTabContent>
+        <div class="form-group">
+          <label for="dp">Inicio:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaInicioInception"                   
+                   placeholder="{{fechaInicioInception}}"
+                   name="dpfechaInicioInception"
+                   ngbDatepicker #dfechaInicioInception="ngbDatepicker"
+                   dateFormat="DD/MM/YYYY"
+                   (ngModelChange)="isValidDate($event,'fechaInicioInception')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaInicioInception.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaInicioInception')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+
+          </div>
+          <app-field-error-display [displayError]="fechaInicioValidInception" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="form-group">
+          <label for="dp">Fin:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaFinInception"
+                   placeholder="{{fechaFinInception}}"
+                   name="dpfechaFinInception"
+                   ngbDatepicker
+                   #dfechaFinInception="ngbDatepicker"
+                   dateFormat="DD/MM/YYYY"
+                   (ngModelChange)="isValidDate($event,'fechaFinInception')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaFinInception.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaFinInception')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaFinValidInception" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="from-group">
+          <label for="avanceInception">Avance (%):</label>
+          <input [(ngModel)]="avanceInception" type="text" class="form-control" id="avanceInception" value="{{avanceInception}}">
+        </div>
+
+        <div class="from-group">
+          <label for="observacionesInception">Observaciones:</label>
+          <input [(ngModel)]="observacionesInception" type="text" class="form-control" id="observacionesInception" value="{{observacionesInception}}">
+        </div>
+
+        <div *ngFor="let doc of entregablesInception; let i = index">
+          <label for="">{{doc.nombreDocumento}}</label>
+          <input [(ngModel)]="entregablesInception[i].urlDocumento" type="text" class="form-control" id="avanceRPF" value="{{doc.urlDocumento}}">
+        </div>
+
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkInception" [(ngModel)]="checkInception" [checked]="checkInception">
+          <label class="custom-control-label" for="checkInception">Vigente</label>
+        </div>
+
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="RFP/RFI">
+      <ng-template ngbTabContent>
+
+        <div class="form-group">
+          <label for="dp">Inicio:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaInicioRPF"
+                   placeholder="{{fechaInicioRPF}}"
+                   name="fechaInicioRPF"
+                   ngbDatepicker
+                   #dfechaInicioRPF="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaInicioRPF')"/>
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaInicioRPF.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaInicioRPF')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaInicioValidRPF" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="form-group">
+          <label for="dp">Fin:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaFinRPF"
+                   placeholder="{{fechaFinRPF}}"
+                   name="fechaFinRPF"
+                   ngbDatepicker
+                   #dfechaFinRPF="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaFinRPF')"/>
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaFinRPF.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaFinRPF')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaFinValidRPF" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="from-group">
+          <label for="avanceRPF">Avance (%):</label>
+          <input [(ngModel)]="avanceRPF" type="text" class="form-control" id="avanceRPF" value="{{avanceRPF}}">
+        </div>
+
+        <div class="from-group">
+          <label for="observacionesRPF">Observaciones:</label>
+          <input [(ngModel)]="observacionesRPF" type="text" class="form-control" id="observacionesRPF" value="{{observacionesRPF}}">
+        </div>
+
+        <div *ngFor="let doc of entregablesRPF; let i = index">
+          <label for="">{{doc.nombreDocumento}}</label>
+          <input [(ngModel)]="entregablesRPF[i].urlDocumento" type="text" class="form-control" id="avanceRPF" value="{{doc.urlDocumento}}">
+        </div>
+
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkRFPRFI" [(ngModel)]="checkRFPRFI" [checked]="checkRFPRFI">
+          <label class="custom-control-label" for="checkRFPRFI">Vigente</label>
+        </div>
+
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="Planning">
+      <ng-template ngbTabContent>
+        <div class="form-group">
+          <label for="dp">Inicio:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaInicioPlanning"
+                   placeholder="{{fechaInicioPlanning}}"
+                   name="dpfechaInicioPlanning"
+                   ngbDatepicker
+                   #dfechaInicioPlanning="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaInicioPlanning')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaInicioPlanning.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaInicioPlanning')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaInicioValidPlanning" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="form-group">
+          <label for="dp">Fin:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaFinPlanning"
+                   placeholder="{{fechaFinPlanning}}"
+                   name="dpfechaFinPlanning"
+                   ngbDatepicker
+                   #dfechaFinPlanning="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaFinPlanning')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaFinPlanning.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaFinPlanning')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaFinValidPlanning" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="from-group">
+          <label for="avancePlanning">Avance (%):</label>
+          <input [(ngModel)]="avancePlanning" type="text" class="form-control" id="avancePlanning" value="{{avancePlanning}}">
+        </div>
+
+
+        <div class="from-group">
+          <label for="observacionesPlanning">Observaciones:</label>
+          <input [(ngModel)]="observacionesPlanning" type="text" class="form-control" id="observacionesPlanning" value="{{observacionesPlanning}}">
+        </div>
+
+        <div *ngFor="let doc of entregablesPlanning; let i = index">
+          <label for="">{{doc.nombreDocumento}}</label>
+          <input [(ngModel)]="entregablesPlanning[i].urlDocumento" type="text" class="form-control" id="avanceRPF" value="{{doc.urlDocumento}}">
+        </div>
+
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkPlanning" [(ngModel)]="checkPlanning" [checked]="checkPlanning">
+          <label class="custom-control-label" for="checkPlanning">Vigente</label>
+        </div>
+
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="Execution">
+      <ng-template ngbTabContent>
+        <div class="form-group">
+          <label for="dp">Inicio:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaInicioExecution"
+                   placeholder="{{fechaInicioExecution}}"
+                   name="dpfechaInicioExecution"
+                   ngbDatepicker
+                   #dfechaInicioExecution="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaInicioExecution')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaInicioExecution.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaInicioExecution')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaInicioValidExecution" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="form-group">
+          <label for="dp">Fin:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaFinExecution"
+                   placeholder="{{fechaFinExecution}}"
+                   name="dpfechaFinExecution"
+                   ngbDatepicker
+                   #dfechaFinExecution="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaFinExecution')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaFinExecution.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaFinExecution')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaFinValidExecution" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="from-group">
+          <label for="avanceExecution">Avance (%):</label>
+          <input [(ngModel)]="avanceExecution" type="text" class="form-control" id="avanceExecution" value="{{avanceExecution}}">
+        </div>
+
+        <div class="from-group">
+          <label for="observacionesExecution">Observaciones:</label>
+          <input [(ngModel)]="observacionesExecution" type="text" class="form-control" id="observacionesExecution" value="{{observacionesExecution}}">
+        </div>
+
+        <div *ngFor="let doc of entregablesExecution; let i = index">
+          <label for="">{{doc.nombreDocumento}}</label>
+          <input [(ngModel)]="entregablesExecution[i].urlDocumento" type="text" class="form-control" id="avanceRPF" value="{{doc.urlDocumento}}">
+        </div>
+
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkExecution" [(ngModel)]="checkExecution" [checked]="checkExecution">
+          <label class="custom-control-label" for="checkExecution">Vigente</label>
+        </div>
+
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="Post Go Live">
+      <ng-template ngbTabContent>
+        <div class="form-group">
+          <label for="dp">Inicio:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaInicioPostGoLive"
+                   placeholder="{{fechaInicioPostGoLive}}"
+                   name="dpfechaInicioPostGoLive"
+                   ngbDatepicker
+                   #dfechaInicioPostGoLive="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaInicioPostGoLive')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaInicioPostGoLive.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaInicioPostGoLive')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaInicioValidPostGoLive" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="form-group">
+          <label for="dp">Fin:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaFinPostGoLive"
+                   placeholder="{{fechaFinPostGoLive}}"
+                   name="dpfechaFinPostGoLive"
+                   ngbDatepicker
+                   #dfechaFinPostGoLive="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaFinPostGoLive')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaFinPostGoLive.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaFinPostGoLive')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaFinValidPostGoLive" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="from-group">
+          <label for="avancePostGoLive">Avance (%):</label>
+          <input [(ngModel)]="avancePostGoLive" type="text" class="form-control" id="avancePostGoLive" value="{{avancePostGoLive}}">
+        </div>
+
+        <div class="from-group">
+          <label for="observacionesPostGoLive">Observaciones:</label>
+          <input [(ngModel)]="observacionesPostGoLive" type="text" class="form-control" id="observacionesPostGoLive" value="{{observacionesPostGoLive}}">
+        </div>
+
+        <div *ngFor="let doc of entregablesPostGoLive; let i = index">
+          <label for="">{{doc.nombreDocumento}}</label>
+          <input [(ngModel)]="entregablesPostGoLive[i].urlDocumento" type="text" class="form-control" id="avanceRPF" value="{{doc.urlDocumento}}">
+        </div>
+
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkPostGoLive" [(ngModel)]="checkPostGoLive" [checked]="checkPostGoLive">
+          <label class="custom-control-label" for="checkPostGoLive">Vigente</label>
+        </div>
+
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="BAU">
+      <ng-template ngbTabContent>
+        <div class="form-group">
+          <label for="dp">Inicio:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaInicioBAU"
+                   placeholder="{{fechaInicioBAU}}"
+                   name="dpfechaInicioBAU"
+                   ngbDatepicker
+                   #dfechaInicioBAU="ngbDatepicker"                   
+                   (ngModelChange)="isValidDate($event,'fechaInicioBAU')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaInicioBAU.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaInicioBAU')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaInicioValidBAU" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="form-group">
+          <label for="dp">Fin:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaFinBAU"
+                   placeholder="{{fechaFinBAU}}"
+                   name="dpfechaFinBAU"
+                   ngbDatepicker
+                   #dfechaFinBAU="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaFinBAU')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaFinBAU.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaFinBAU')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaFinValidBAU" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="from-group">
+          <label for="avanceBAU">Avance (%):</label>
+          <input [(ngModel)]="avanceBAU" type="text" class="form-control" id="avanceBAU" value="{{avanceBAU}}">
+        </div>
+
+        <div class="from-group">
+          <label for="observacionesBAU">Observaciones:</label>
+          <input [(ngModel)]="observacionesBAU" type="text" class="form-control" id="observacionesBAU" value="{{observacionesBAU}}">
+        </div>
+
+        <div *ngFor="let doc of entregablesBAU; let i = index">
+          <label for="">{{doc.nombreDocumento}}</label>
+          <input [(ngModel)]="entregablesBAU[i].urlDocumento" type="text" class="form-control" id="avanceRPF" value="{{doc.urlDocumento}}">
+        </div>
+
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkBAU" [(ngModel)]="checkBAU" [checked]="checkBAU">
+          <label class="custom-control-label" for="checkBAU">Vigente</label>
+        </div>
+
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="Benefits management">
+      <ng-template ngbTabContent>
+        <div class="form-group">
+          <label for="dp">Inicio:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaInicioBenefits"
+                   placeholder="{{fechaInicioBenefits}}"
+                   name="dpfechaInicioBenefits"
+                   ngbDatepicker
+                   #dfechaInicioBenefits="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaInicioBenefits')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaInicioBenefits.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaInicioBenefits')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaInicioValidBenefits" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="form-group">
+          <label for="dp">Fin:</label>
+          <div class="input-group">
+            <input class="form-control"
+                   [(ngModel)]="fechaFinBenefits"
+                   placeholder="{{fechaFinBenefits}}"
+                   name="dpfechaFinBenefits"
+                   ngbDatepicker
+                   #dfechaFinBenefits="ngbDatepicker"
+                   (ngModelChange)="isValidDate($event,'fechaFinBenefits')">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" (click)="dfechaFinBenefits.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button class="btn btn-secondary" (click)="clearDate('fechaFinBenefits')" type="button">
+                <i class="fa fa-calendar-times-o"></i>
+              </button>
+            </div>
+          </div>
+          <app-field-error-display [displayError]="fechaFinValidBenefits" errorMsg="Formato de fecha incorrecto">
+          </app-field-error-display>
+        </div>
+
+        <div class="from-group">
+          <label for="avanceBenefits">Avance (%):</label>
+          <input [(ngModel)]="avanceBenefits" type="text" class="form-control" id="avanceBenefits" value="{{avanceBenefits}}">
+        </div>
+
+        <div class="from-group">
+          <label for="observacionesBenefits">Observaciones:</label>
+          <input [(ngModel)]="observacionesBenefits" type="text" class="form-control" id="observacionesBenefits" value="{{observacionesBenefits}}">
+        </div>
+
+        <div *ngFor="let doc of entregablesBenefits; let i = index">
+          <label for="">{{doc.nombreDocumento}}</label>
+          <input [(ngModel)]="entregablesBenefits[i].urlDocumento" type="text" class="form-control" id="avanceRPF" value="{{doc.urlDocumento}}">
+        </div>
+
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="checkBenefits" [(ngModel)]="checkBenefits" [checked]="checkBenefits">
+          <label class="custom-control-label" for="checkBenefits">Vigente</label>
+        </div>
+
+      </ng-template>
+    </ngb-tab>
+
+  </ngb-tabset>
+</div>
